@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>ANSYS计算宏生成助手</title>
-<?php
+    <meta charset="utf-8">
+    <title>ANSYS计算宏生成助手</title>
+    <?php
 $macname = strval(isset($_POST['macname'])? $_POST['macname'] : '');//宏文件名
 if($macname){
 }else{
 ?>
-<script src="js/ansysmac.js"></script>
-<?php
+    <script src="js/ansysmac.js"></script>
+    <?php
 }
 ?>
-<link rel="stylesheet" type="text/css" href="css/ansysmac.css">
+    <link rel="stylesheet" type="text/css" href="css/ansysmac.css">
 </head>
+
 <body>
-<div id="main">
-<div id="header">ANSYS计算宏生成助手</div>
-<?php
+    <div id="main">
+        <div id="header">ANSYS计算宏生成助手</div>
+        <?php
 include_once('common.php');
 //TODO:保存文件路径用日期格式，年、月、日、时分秒、文件名
 //接收表单传递的参数，赋值给对应的变量
@@ -1927,161 +1929,172 @@ EOF;
 } 
 else{
 ?>
-<form action="" method="post">
-<div id="lefttop">
-	<div id="box1">
-		宏名称:<input type="text" name="macname" value="macname" id="macname">
-	</div>
-	<div class="cl"></div>
-	<div id="box2">
-		<div id="box21">
-			加载点数量:
-			<input name="loadkpnum" type="radio" id="load1" value="1" checked>1
-			<input name="loadkpnum" type="radio" id="load4" value="4">4
-		</div>
-		<div id="box22">
-			约束点数量:
-			<select name="ysnum">
-			<option value="2" selected>2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			</select>
-		</div>
-		<div id="box23">
-			工况数量:
-			<input type="radio" checked name="casenum" value="8" id="case8">8
-			<div id="case360"><input type="radio" name="casenum" value="360" id="ca360">360</div>
-		</div>
-	</div>
-	<div id="box3">
-		<div id="box30">加载点关键点编号:</div>
-		<div id="box31">
-			<input name="kp1" type="text" value="1">
-			<input name="kp2" type="text" class="kp4" value="2">
-			<input name="kp3" type="text" class="kp4" value="3">
-			<input name="kp4" type="text" class="kp4" value="4">
-		</div>
-		<div id="box319">约束点node编号:</div>
-		<div id="box32">
-			<input type="text" name="node1" value="1">
-			<input type="text" name="node2" value="2">
-			<input type="text" name="node3" class="node" value="3">
-			<input type="text" name="node4" class="node" value="4">
-			<input type="text" name="node5" class="node" value="5">
-			<input type="text" name="node6" class="node" value="6">
-			<input type="text" name="node7" class="node" value="7">
-			<input type="text" name="node8" class="node" value="8">
-		</div>
-		<div id="box33">
-			<input type="checkbox" name="fix" value="1">约束旋转
-		</div>
-	</div>
-	<div class="cl"></div>
-</div><!--lefttop-->
-<div id="righttop">
-	<div id="box41">载荷</div>
-	<div id="fv"><input type="checkbox" name="ckfv" value="1">垂直力<input type="text" name="fv" value="0" disabled>t</div>
-	<div id="fs"><input type="checkbox" name="ckfs" value="1">水平力<input type="text" name="fs" value="0" disabled>t</div>
-	<div id="m"><input type="checkbox" name="ckm" value="1">弯矩<input type="text" name="m" value="0" disabled>t.m</div>
-	<div id="mk"><input type="checkbox" name="ckmk" value="1">扭矩<input type="text" name="mk" value="0" disabled>t.m</div>
-	<div id="fmk"><input type="checkbox" name="ckfmk" value="1">扭矩力<input type="text" name="fmk" value="0" disabled>t</div>
-</div><!--righttop-->
-<div class="cl"></div>
-<div class="hline"></div>
-<div id="leftdown">
-	<div id="box51">输出结果和截图</div>
-	<div id="box52">
-		<div id="rf"><input type="checkbox" checked name="rf" value="1">反力</div>
-		<div id="fwj"><input type="checkbox" name="rm" value="1">反弯矩<br></div>
-		<div id="af"><input type="checkbox" name="af" value="1">杆轴力</div>
-		<div id="zhouli">
-			<div id="box521">数量</div>
-			<div id="box522"> 
-				<select name="afnum">
-				<option value="1" selected>1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				</select>
-			</div>
-			<div id="box523">杆件elem编号:</div>
-			<div id="box524">
-				<input type="text" name="elem1" value="1">
-				<input type="text" name="elem2" class="elem" value="2">
-				<input type="text" name="elem3" class="elem" value="3">
-				<input type="text" name="elem4" class="elem" value="4">
-				<input type="text" name="elem5" class="elem" value="5">
-				<input type="text" name="elem6" class="elem" value="6">
-				<input type="text" name="elem7" class="elem" value="7">
-				<input type="text" name="elem8" class="elem" value="8">
-			</div>
-		</div><!--zhouli-->
-	</div>
-	<div id="box53">
-		<div id="box531"><input type="checkbox" name="dfx" value="1">整体X向位移</div>
-		<div id="box532"><input type="checkbox" name="dfy" value="1">整体y向位移</div>
-		<div id="box533"><input type="checkbox" name="dfz" value="1">整体z向位移</div>
-		<div id="box534"><input type="checkbox" name="dftotal" value="1">整体合位移</div>
-		<div id="box535"><input type="checkbox" name="stotal" value="1">整体合应力</div>
-	</div>
-	<div id="box54">
-		<div id="box541">组件CP数量</div>
-		<div id="box542">
-			<select name="cpnum">
-			<option value="0" selected >0</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			</select>
-		</div>
-		<div id="cp">
-			<input type="checkbox" name="cpnx" value="1">组件CPN X向位移
-			<input type="checkbox" name="cpny" value="1">组件CPN y向位移
-			<input type="checkbox" name="cpnz" value="1">组件CPN z向位移
-			<input type="checkbox" name="cpnt" value="1">组件CPN 合位移
-			<input type="checkbox" name="cpnst" value="1">组件CPN 合应力
-		</div>
-	</div>
-</div><!--leftdown-->
-<div id="rightdown">
-	<div id="shuoming">
-		<div id="shuo">说明</div>
-		<ol>
-			<li>宏名称使用英文字母开头，由字母和数字组成，长度不超过10位</li>
-			<li>需要对模型中组件截图时，应提前在模型中设置好line组件，且名称以‘CP+数字编号’的形式从CP1到CP8，最多支持设置8个组件，截图保存的顺序是先整体后组件</li>
-			<li>加载点从第四象限开始逆时针依次填入</li>
-			<li>8工况条件下可生成python脚本辅助汇总结果</li>
-			<li>一点加载360工况条件下可生成python脚本辅助生成反力曲线图</li>
-			<li>Z+为竖直向上，Y-为工况1，其余工况逆时针排列</li>
-			<li>边界约束、重力加速度以及大变形等前处理部分需提前在ANSYS中设置，本程序涉及的步骤为加载求解和后处理</li>
-		</ol>
-	</div>
-	<div class="cl"></div>
-	<div id="button1">
-		<input type="submit" value="生成脚本">
-	</div>
-	<div id="button2">
-		<button type="button" onclick="javascript:location.reload()">重置页面</button>
-	</div>
-</div>
-<div class="cl"></div>
-</form>
-<?php
+        <form action="" method="post">
+            <div id="lefttop">
+                <div id="box1">
+                    宏名称:<input type="text" name="macname" value="macname" id="macname">
+                </div>
+                <div class="cl"></div>
+                <div id="box2">
+                    <div id="box21">
+                        加载点数量:
+                        <input name="loadkpnum" type="radio" id="load1" value="1" checked>1
+                        <input name="loadkpnum" type="radio" id="load4" value="4">4
+                    </div>
+                    <div id="box22">
+                        约束点数量:
+                        <select name="ysnum">
+                            <option value="2" selected>2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+                    <div id="box23">
+                        工况数量:
+                        <input type="radio" checked name="casenum" value="8" id="case8">8
+                        <div id="case360"><input type="radio" name="casenum" value="360" id="ca360">360</div>
+                    </div>
+                </div>
+                <div id="box3">
+                    <div id="box30">加载点关键点编号:</div>
+                    <div id="box31">
+                        <input name="kp1" type="text" value="1">
+                        <input name="kp2" type="text" class="kp4" value="2">
+                        <input name="kp3" type="text" class="kp4" value="3">
+                        <input name="kp4" type="text" class="kp4" value="4">
+                    </div>
+                    <div id="box319">约束点node编号:</div>
+                    <div id="box32">
+                        <input type="text" name="node1" value="1">
+                        <input type="text" name="node2" value="2">
+                        <input type="text" name="node3" class="node" value="3">
+                        <input type="text" name="node4" class="node" value="4">
+                        <input type="text" name="node5" class="node" value="5">
+                        <input type="text" name="node6" class="node" value="6">
+                        <input type="text" name="node7" class="node" value="7">
+                        <input type="text" name="node8" class="node" value="8">
+                    </div>
+                    <div id="box33">
+                        <input type="checkbox" name="fix" value="1">约束旋转
+                    </div>
+                </div>
+                <div class="cl"></div>
+            </div>
+            <!--lefttop-->
+            <div id="righttop">
+                <div id="box41">载荷</div>
+                <div id="fv"><input type="checkbox" name="ckfv" value="1">垂直力<input type="text" name="fv" value="0"
+                        disabled>t</div>
+                <div id="fs"><input type="checkbox" name="ckfs" value="1">水平力<input type="text" name="fs" value="0"
+                        disabled>t</div>
+                <div id="m"><input type="checkbox" name="ckm" value="1">弯矩<input type="text" name="m" value="0"
+                        disabled>t.m</div>
+                <div id="mk"><input type="checkbox" name="ckmk" value="1">扭矩<input type="text" name="mk" value="0"
+                        disabled>t.m</div>
+                <div id="fmk"><input type="checkbox" name="ckfmk" value="1">扭矩力<input type="text" name="fmk" value="0"
+                        disabled>t</div>
+            </div>
+            <!--righttop-->
+            <div class="cl"></div>
+            <div class="hline"></div>
+            <div id="leftdown">
+                <div id="box51">输出结果和截图</div>
+                <div id="box52">
+                    <div id="rf"><input type="checkbox" checked name="rf" value="1">反力</div>
+                    <div id="fwj"><input type="checkbox" name="rm" value="1">反弯矩<br></div>
+                    <div id="af"><input type="checkbox" name="af" value="1">杆轴力</div>
+                    <div id="zhouli">
+                        <div id="box521">数量</div>
+                        <div id="box522">
+                            <select name="afnum">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select>
+                        </div>
+                        <div id="box523">杆件elem编号:</div>
+                        <div id="box524">
+                            <input type="text" name="elem1" value="1">
+                            <input type="text" name="elem2" class="elem" value="2">
+                            <input type="text" name="elem3" class="elem" value="3">
+                            <input type="text" name="elem4" class="elem" value="4">
+                            <input type="text" name="elem5" class="elem" value="5">
+                            <input type="text" name="elem6" class="elem" value="6">
+                            <input type="text" name="elem7" class="elem" value="7">
+                            <input type="text" name="elem8" class="elem" value="8">
+                        </div>
+                    </div>
+                    <!--zhouli-->
+                </div>
+                <div id="box53">
+                    <div id="box531"><input type="checkbox" name="dfx" value="1">整体X向位移</div>
+                    <div id="box532"><input type="checkbox" name="dfy" value="1">整体y向位移</div>
+                    <div id="box533"><input type="checkbox" name="dfz" value="1">整体z向位移</div>
+                    <div id="box534"><input type="checkbox" name="dftotal" value="1">整体合位移</div>
+                    <div id="box535"><input type="checkbox" name="stotal" value="1">整体合应力</div>
+                </div>
+                <div id="box54">
+                    <div id="box541">组件CP数量</div>
+                    <div id="box542">
+                        <select name="cpnum">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+                    <div id="cp">
+                        <input type="checkbox" name="cpnx" value="1">组件CPN X向位移
+                        <input type="checkbox" name="cpny" value="1">组件CPN y向位移
+                        <input type="checkbox" name="cpnz" value="1">组件CPN z向位移
+                        <input type="checkbox" name="cpnt" value="1">组件CPN 合位移
+                        <input type="checkbox" name="cpnst" value="1">组件CPN 合应力
+                    </div>
+                </div>
+            </div>
+            <!--leftdown-->
+            <div id="rightdown">
+                <div id="shuoming">
+                    <div id="shuo">说明</div>
+                    <ol>
+                        <li>宏名称使用英文字母开头，由字母和数字组成，长度不超过10位</li>
+                        <li>需要对模型中组件截图时，应提前在模型中设置好line组件，且名称以‘CP+数字编号’的形式从CP1到CP8，最多支持设置8个组件，截图保存的顺序是先整体后组件</li>
+                        <li>加载点从第四象限开始逆时针依次填入</li>
+                        <li>8工况条件下可生成python脚本辅助汇总结果</li>
+                        <li>一点加载360工况条件下可生成python脚本辅助生成反力曲线图</li>
+                        <li>Z+为竖直向上，Y-为工况1，其余工况逆时针排列</li>
+                        <li>边界约束、重力加速度以及大变形等前处理部分需提前在ANSYS中设置，本程序涉及的步骤为加载求解和后处理</li>
+                    </ol>
+                </div>
+                <div class="cl"></div>
+                <div id="button1">
+                    <input type="submit" value="生成脚本">
+                </div>
+                <div id="button2">
+                    <button type="button" onclick="javascript:location.reload()">重置页面</button>
+                </div>
+            </div>
+            <div class="cl"></div>
+        </form>
+        <?php
 }
 ?>
-</div><!--main-->
+    </div>
+    <!--main-->
 </body>
+
 </html>
