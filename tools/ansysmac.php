@@ -9,11 +9,11 @@ $macname = strval(isset($_POST['macname'])? $_POST['macname'] : '');//宏文件�
 if($macname){
 }else{
 ?>
-    <script src="js/ansysmac.js"></script>
+    <script src="/js/ansysmac.js"></script>
     <?php
 }
 ?>
-    <link rel="stylesheet" type="text/css" href="css/ansysmac.css">
+    <link rel="stylesheet" type="text/css" href="/css/ansysmac.css">
 </head>
 
 <body>
