@@ -106,7 +106,7 @@ EOF;
             </div>
             <div class="row mt-3">
                 <div class="d-grid col-3 mx-auto">
-                    <button type="submit" class="btn btn-primary btn-lg bi-calculator">计算</button>
+                    <button type="submit" class="btn btn-primary btn-lg bi-calculator text-nowrap">计算</button>
                 </div>
             </div>
         </form>
