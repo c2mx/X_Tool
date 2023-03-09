@@ -226,6 +226,7 @@ function chca360() {
   document.querySelector('input[name="cpnst"]').checked=false;
 
   document.querySelector('select[id="sel3"]').selectedIndex = 0;
+  document.querySelector('select[id="sel3"]').disabled = true;
 }
 
 function chca8() {
@@ -241,4 +242,6 @@ function chca8() {
   document.querySelector('input[name="cpnz"]').disabled=false;
   document.querySelector('input[name="cpnt"]').disabled=false;
   document.querySelector('input[name="cpnst"]').disabled=false;
+
+  document.querySelector('select[id="sel3"]').disabled = false;
 }
