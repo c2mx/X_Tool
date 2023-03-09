@@ -143,32 +143,48 @@ else{//如果没有点击提交按钮，则macname参数是空值，则显示表
                 <input class="form-check-input" type="checkbox" id="fix" name="fix" value="1">
                 <label class="form-check-label text-nowrap" for="fix">节点是否约束了旋转</label>
             </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">垂直力</span>
+                        <input type="text" class="form-control" placeholder="" name="fv">
+                        <span class="input-group-text">t</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">水平力</span>
+                        <input type="text" class="form-control" placeholder="" name="fs">
+                        <span class="input-group-text">t</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">弯矩</span>
+                        <input type="text" class="form-control" placeholder="" name="m">
+                        <span class="input-group-text">t.m</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">扭矩</span>
+                        <input type="text" class="form-control" placeholder="" name="mk">
+                        <span class="input-group-text">t.m</span>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">扭矩力</span>
+                        <input type="text" class="form-control" placeholder="" name="fmk">
+                        <span class="input-group-text">t</span>
+                    </div>
+                </div>
+            </div>
 
-            <div class="input-group mb-3">
-                <span class="input-group-text">垂直力</span>
-                <input type="text" class="form-control" placeholder="" name="fv">
-                <span class="input-group-text">t</span>
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text">水平力</span>
-                <input type="text" class="form-control" placeholder="" name="fs">
-                <span class="input-group-text">t</span>
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text">弯矩</span>
-                <input type="text" class="form-control" placeholder="" name="m">
-                <span class="input-group-text">t.m</span>
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text">扭矩</span>
-                <input type="text" class="form-control" placeholder="" name="mk">
-                <span class="input-group-text">t.m</span>
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text">扭矩力</span>
-                <input type="text" class="form-control" placeholder="" name="fmk">
-                <span class="input-group-text">t</span>
-            </div>
+
+
             <div class="row">
                 <div class="col-md">
                     <div class="form-check form-switch mb-3">
