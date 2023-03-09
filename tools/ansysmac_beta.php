@@ -90,25 +90,54 @@ else{//如果没有点击提交按钮，则macname参数是空值，则显示表
                     </div>
                 </div>
             </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text">加载点编号:</span>
-                <input type="text" class="form-control" name="kp1">
-                <input type="text" class="form-control" name="kp2">
-                <input type="text" class="form-control" name="kp3">
-                <input type="text" class="form-control" name="kp4">
+
+
+            <label class="form-label mb-3">加载点编号:</label>
+            <div class="row">
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="kp1">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="kp2">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="kp3">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="kp4">
+                </div>
             </div>
 
-            <div class="input-group mb-3">
-                <span class="input-group-text">约束点编号:</span>
-                <input type="text" class="form-control" name="node1">
-                <input type="text" class="form-control" name="node2">
-                <input type="text" class="form-control" name="node3">
-                <input type="text" class="form-control" name="node4">
-                <input type="text" class="form-control" name="node5">
-                <input type="text" class="form-control" name="node6">
-                <input type="text" class="form-control" name="node7">
-                <input type="text" class="form-control" name="node8">
+            <label class="form-label mb-3">约束点编号:</label>
+            <div class="row">
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="node1">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="node2">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="node3">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="node4">
+                </div>
             </div>
+            <div class="row">
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="node5">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="node6">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="node7">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="node8">
+                </div>
+            </div>
+
 
             <div class="form-check form-switch mb-3">
                 <input class="form-check-input" type="checkbox" id="fix" name="fix" value="1">
@@ -175,17 +204,37 @@ else{//如果没有点击提交按钮，则macname参数是空值，则显示表
                 <label for="sel2" class="form-label">杆件数量</label>
             </div>
 
-            <div class="input-group mb-3">
-                <span class="input-group-text">杆件编号:</span>
-                <input type="text" class="form-control" name="elem1">
-                <input type="text" class="form-control" name="elem2">
-                <input type="text" class="form-control" name="elem3">
-                <input type="text" class="form-control" name="elem4">
-                <input type="text" class="form-control" name="elem5">
-                <input type="text" class="form-control" name="elem6">
-                <input type="text" class="form-control" name="elem7">
-                <input type="text" class="form-control" name="elem8">
+
+            <label class="form-label mb-3">杆件编号:</label>
+            <div class="row">
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="elem1">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="elem2">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="elem3">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="elem4">
+                </div>
             </div>
+            <div class="row">
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="elem5">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="elem6">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="elem7">
+                </div>
+                <div class="col-sm mb-3">
+                    <input type="text" class="form-control" name="elem8">
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md">
                     <div class="form-check form-switch mb-3">
