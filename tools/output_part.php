@@ -12,7 +12,9 @@ $fp = fopen($macfilename,'w');
 fwrite($fp,$mac);
 fclose($fp);
 echo <<<EOF
-<p><a href="$macfilename">宏命令下载</a>(右键另存为)</p>
+<div class="alert alert-primary">
+<a href="$macfilename">宏命令下载</a>(右键另存为)
+</div>
 EOF;
 
 //写出python文件
@@ -390,7 +392,9 @@ $fpy = fopen($pythonfile,'w');
 fwrite($fpy,$py8);
 fclose($fpy);
 echo <<<EOF
-<p><a href="$pythonfile">Python脚本下载</a>(右键另存为)</p>
+<div class="alert alert-primary">
+<a href="$pythonfile">Python脚本下载</a>(右键另存为)
+<div>
 EOF;
 }//8工况结束
 
@@ -472,7 +476,9 @@ $fpyn = fopen($pythonfile2,'w');
 fwrite($fpyn,$pyn360);
 fclose($fpyn);
 echo <<<EOF
-<p><a href="$pythonfile2">节点反力Python脚本下载</a>(右键另存为)</p>
+<div class="alert alert-primary">
+<a href="$pythonfile2">节点反力Python脚本下载</a>(右键另存为)
+</div>
 EOF;
 }
 else{//有反弯矩的情况
@@ -594,7 +600,9 @@ $fpyn = fopen($pythonfile2,'w');
 fwrite($fpyn,$pyn360);
 fclose($fpyn);
 echo <<<EOF
-<p><a href="$pythonfile2">节点反力Python脚本下载</a>(右键另存为)</p>
+<div class="alert alert-primary">
+<a href="$pythonfile2">节点反力Python脚本下载</a>(右键另存为)
+</div>
 EOF;
 }
 }
@@ -647,7 +655,9 @@ $fpye = fopen($pythonfile3,'w');
 fwrite($fpye,$pys360);
 fclose($fpye);
 echo <<<EOF
-<p><a href="$pythonfile3">杆件轴力Python脚本下载</a>(右键另存为)</p>
+<div class="alert alert-primary">
+<a href="$pythonfile3">杆件轴力Python脚本下载</a>(右键另存为)
+</div>
 EOF;
 }//轴力图输出脚本--结束
 }//360工况输出脚本--结束
