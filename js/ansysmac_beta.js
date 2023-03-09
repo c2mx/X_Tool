@@ -5,6 +5,7 @@ window.onload = function () {//初始化
   //四点加载
   document.querySelector('input[id="load4"]').checked = true;
   //6个约束点
+  document.querySelector('select[id="sel1"]').selectedIndex = 4;
   var x = document.querySelectorAll('input[name^="node"]');
   for (i = 0; i < 6; i++) {
     x[i].disabled=false;
