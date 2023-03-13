@@ -23,8 +23,10 @@ if($macname){
 
 <body>
     <div class="container-sm p-3">
-        <h1 class="text-center bi-gear-wide-connected p-3">ANSYS计算宏生成助手</h1>
         <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="/">首页</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/tools/ansysmac_beta.php">宏生成</a>
             </li>
@@ -41,6 +43,8 @@ if($macname){
                 <a class="nav-link" href="/tools/win10.html">Win10激活</a>
             </li>
         </ul>
+        <h1 class="text-center bi-gear-wide-connected p-3">ANSYS计算宏生成助手</h1>
+
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <strong>说明</strong>

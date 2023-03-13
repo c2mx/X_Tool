@@ -13,8 +13,10 @@
 
 <body>
     <div class="container p-1 my-1">
-        <h1 class="text-center bi-gear-wide-connected"> 行走/底架-最大支反力计算</h1>
         <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="/">首页</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/tools/ansysmac_beta.php">宏生成</a>
             </li>
@@ -31,6 +33,8 @@
                 <a class="nav-link" href="/tools/win10.html">Win10激活</a>
             </li>
         </ul>
+        <h1 class="text-center bi-gear-wide-connected"> 行走/底架-最大支反力计算</h1>
+
         <?php
 $lunju = floatval(isset($_POST['lunju'])? $_POST['lunju'] : '0');
 $guiju = floatval(isset($_POST['guiju'])? $_POST['guiju'] : '0');
