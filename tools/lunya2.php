@@ -14,6 +14,23 @@
 <body>
     <div class="container p-1 my-1">
         <h1 class="text-center bi-gear-wide-connected"> 行走/底架-最大支反力计算</h1>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/ansysmac_beta.php">宏生成</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/lunya2.php">轮压计算</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/pianbai2.php">等效侧向力</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/compress_member.html">压杆校核</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/win10.html">Win10激活</a>
+            </li>
+        </ul>
         <?php
 $lunju = floatval(isset($_POST['lunju'])? $_POST['lunju'] : '0');
 $guiju = floatval(isset($_POST['guiju'])? $_POST['guiju'] : '0');
