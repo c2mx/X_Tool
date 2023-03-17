@@ -1,11 +1,11 @@
 //1. get data
-const lunju = document.querySelector('input[name="lunju"]');
-const guiju = document.querySelector('input[name="guiju"]');
-const wm = document.querySelector('input[name="wm"]');
-const nwm = document.querySelector('input[name="nwm"]');
-const tg = document.querySelector('input[name="tg"]');
-const xzg = document.querySelector('input[name="xzg"]');
-const gmax = document.querySelector('input[name="gmax"]');
+const lunju = Number(document.querySelector('input[name="lunju"]').value);
+const guiju = Number(document.querySelector('input[name="guiju"]').value);
+const wm = Number(document.querySelector('input[name="wm"]').value);
+const nwm = Number(document.querySelector('input[name="nwm"]').value);
+const tg = Number(document.querySelector('input[name="tg"]').value);
+const xzg = Number(document.querySelector('input[name="xzg"]').value);
+const gmax = Number(document.querySelector('input[name="gmax"]').value);
 
 const calc = document.getElementById("calc"); //计算
 const clear = document.getElementById("clear"); //清空
@@ -80,13 +80,13 @@ function jisuan() {
 }
 function cleardata() {
     //清空
-    lunju.value = "";
-    guiju.value = "";
-    wm.value = "";
-    nwm.value = "";
-    tg.value = "";
-    xzg.value = "";
-    gmax.value = "";
+    document.querySelector('input[name="lunju"]').value = "";
+    document.querySelector('input[name="guiju"]').value = "";
+    document.querySelector('input[name="wm"]').value = "";
+    document.querySelector('input[name="nwm"]').value = "";
+    document.querySelector('input[name="tg"]').value = "";
+    document.querySelector('input[name="xzg"]').value = "";
+    document.querySelector('input[name="gmax"]').value = "";
     document.getElementById("result").style.display = "none";
 }
 
