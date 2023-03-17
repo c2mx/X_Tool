@@ -44,7 +44,7 @@ function jisuan() {
     let fmax = 0;
     let fmin = 0;
     if (lunju * guiju > 0) {
-        console.log(glunju * guijumax);
+        console.log(lunju * guiju);
         l = lunju * guiju / Math.sqrt(Math.pow(guiju, 2) + Math.pow(lunju, 2));
         fwmax = (tg + xzg + gmax) / 4 + wm / (2 * l);
         fwmin = (tg + xzg + gmax) / 4 - wm / (2 * l);
@@ -75,7 +75,6 @@ function jisuan() {
         out_nws.textContent = nws.toFixed(1);
         out_fmax.textContent = fmax.toFixed(1);
         out_fmin.textContent = fmin.toFixed(1);
-
         document.getElementById("result").style.display = "";
     }
 }
@@ -89,6 +88,7 @@ function cleardata() {
     document.querySelector('input[name="xzg"]').value = "";
     document.querySelector('input[name="gmax"]').value = "";
     document.getElementById("result").style.display = "none";
+    console.log("clear");
 }
 
 calc.addEventListener("click", jisuan);
