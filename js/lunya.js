@@ -51,7 +51,7 @@ function jisuan() {
         ws = mst / wm;
         fnwmax = (tg + xzg) / 4 + nwm / (2 * l);
         fnwmin = (tg + xzg) / 4 - nwm / (2 * l);
-        mnst = (tg + $xzg) * Math.min(lunju, guiju) / 2;
+        mnst = (tg + xzg) * Math.min(lunju, guiju) / 2;
         nws = mnst / nwm;
         fmax = Math.max(fwmax, fnwmax);
         fmin = Math.min(fwmin, fnwmin);
