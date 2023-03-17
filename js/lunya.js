@@ -1,12 +1,5 @@
 //1. get data
-const lunju = Number(document.querySelector('input[name="lunju"]').value);
-const guiju = Number(document.querySelector('input[name="guiju"]').value);
-const wm = Number(document.querySelector('input[name="wm"]').value);
-const nwm = Number(document.querySelector('input[name="nwm"]').value);
-const tg = Number(document.querySelector('input[name="tg"]').value);
-const xzg = Number(document.querySelector('input[name="xzg"]').value);
-const gmax = Number(document.querySelector('input[name="gmax"]').value);
-console.log(gmax);
+
 const calc = document.getElementById("calc"); //计算
 const clear = document.getElementById("clear"); //清空
 
@@ -43,6 +36,14 @@ function jisuan() {
     let nws = 0;
     let fmax = 0;
     let fmin = 0;
+    const lunju = Number(document.querySelector('input[name="lunju"]').value);
+    const guiju = Number(document.querySelector('input[name="guiju"]').value);
+    const wm = Number(document.querySelector('input[name="wm"]').value);
+    const nwm = Number(document.querySelector('input[name="nwm"]').value);
+    const tg = Number(document.querySelector('input[name="tg"]').value);
+    const xzg = Number(document.querySelector('input[name="xzg"]').value);
+    const gmax = Number(document.querySelector('input[name="gmax"]').value);
+    console.log(gmax);
     if (lunju * guiju > 0) {
         console.log(lunju * guiju);
         l = lunju * guiju / Math.sqrt(Math.pow(guiju, 2) + Math.pow(lunju, 2));
