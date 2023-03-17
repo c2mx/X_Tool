@@ -1,7 +1,6 @@
 //1. get data
-
-const calc = document.getElementById("calc"); //计算
-const clear = document.getElementById("clear"); //清空
+const calc = document.getElementById("calc"); //calculate button
+const clear = document.getElementById("clear"); //clear button
 
 const out_lunju = document.getElementById("lunju"); //
 const out_guiju = document.getElementById("guiju"); //
@@ -21,7 +20,6 @@ const out_mnst = document.getElementById("mnst"); //
 const out_nws = document.getElementById("nws"); //
 const out_fmax = document.getElementById("fmax"); //
 const out_fmin = document.getElementById("fmin"); //
-
 
 //2. calculate
 function jisuan() {
@@ -80,7 +78,7 @@ function jisuan() {
     }
 }
 function cleardata() {
-    //清空
+    //clear
     document.querySelector('input[name="lunju"]').value = "";
     document.querySelector('input[name="guiju"]').value = "";
     document.querySelector('input[name="wm"]').value = "";
