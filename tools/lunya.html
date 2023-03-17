@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>行走/底架-最大支反力计算</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-icons/1.10.3/font/bootstrap-icons.css">
+    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+    <script>
+        window.onload = function () {
+            document.getElementById("result").style.display = "none";
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container p-3">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="/">首页</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/ansysmac_beta.php">宏生成</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/lunya2.php">轮压计算</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/pianbai2.php">等效侧向力</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/compress_member.html">压杆校核</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/win10.html">Win10激活</a>
+            </li>
+        </ul>
+        <h1 class="text-center bi-gear-wide-connected p-3"> 行走/底架-最大支反力计算</h1>
+        <div class="row">
+            <div class="col-md">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">轮距</span>
+                    <input type="text" class="form-control" placeholder="" name="lunju" />
+                    <span class="input-group-text"><i>m</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">轨距</span>
+                    <input type="text" class="form-control" placeholder="" name="guiju" />
+                    <span class="input-group-text"><i>m</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">工作弯矩</span>
+                    <input type="text" class="form-control" placeholder="" name="wm" />
+                    <span class="input-group-text"><i>t.m</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">非工作弯矩</span>
+                    <input type="text" class="form-control" placeholder="" name="nwm" />
+                    <span class="input-group-text"><i>t.m</i></span>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">塔机自重</span>
+                    <input type="text" class="form-control" placeholder="" name="tg" />
+                    <span class="input-group-text"><i>t</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">行走机构自重</span>
+                    <input type="text" class="form-control" placeholder="" name="xzg" />
+                    <span class="input-group-text"><i>t</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">最大吊重</span>
+                    <input type="text" class="form-control" placeholder="" name="gmax" />
+                    <span class="input-group-text"><i>t</i></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="d-grid col-md mx-auto mb-3">
+                <button id="clear" type="button" class="btn btn-danger btn-lg text-nowrap">
+                    清空
+                </button>
+            </div>
+            <div class="d-grid col-md mx-auto mb-3">
+                <button id="calc" type="submit" class="btn btn-primary btn-lg text-nowrap">
+                    计算
+                </button>
+            </div>
+        </div>
+
+
+        <div class="row" id="result">
+            <div class="col-md">
+                <div class="alert alert-info">
+                    <ul>
+                        <li>轮距：<mark id="lunju"></mark>m</li>
+                        <li>轨距：<mark id="guiju"></mark>m</li>
+                        <li>工作弯矩：<mark id="wm"></mark>t.m</li>
+                        <li>非工作弯矩：<mark id="nwm"></mark>t.m</li>
+                        <li>塔机自重：<mark id="tg"></mark>t</li>
+                        <li>行走机构自重：<mark id="xzg"></mark>t</li>
+                        <li>最大吊重：<mark id="gmax"></mark>t</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="alert alert-success">
+                    <ul>
+                        <li>工作状态最大轮压为<mark id="fwmax"></mark>t</li>
+                        <li>工作状态最小轮压为<mark id="fwmin"></mark>t</li>
+                        <li>工作状态稳定力矩为<mark id="mst"></mark>t.m，稳定系数<mark id="ws"></mark></li>
+                        <li>非工作状态最大轮压为<mark id="fnwmax"></mark>t</li>
+                        <li>非工作状态最小轮压为<mark id="fnwmin"></mark>t</li>
+                        <li>非工作状态稳定力矩为<mark id="mnst"></mark>t.m，稳定系数<mark id="nws"></mark></li>
+                        <li><strong>综合工作和非工作：最大轮压为<mark id="fmax"></mark>t,最小轮压为<mark id="fmin"></mark>t</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--main-->
+    <script src="/js/lunya.js"></script>
+</body>
+
+</html>
