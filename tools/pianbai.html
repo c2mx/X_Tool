@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>动臂塔机吊臂头部侧向等效载荷计算</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-icons/1.10.3/font/bootstrap-icons.css">
+    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+    <script>
+        window.onload = function () {
+            document.getElementById("result").style.display = "none";
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container p-3">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="/">首页</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/ansysmac.php">宏生成</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/lunya.html">轮压计算</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/pianbai.html">等效侧向力</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/compress_member.html">压杆校核</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tools/win10.html">Win10激活</a>
+            </li>
+        </ul>
+        <h1 class="text-center bi-gear-wide-connected p-3"> 动臂塔机吊臂头部侧向等效载荷计算</h1>
+
+
+        <div class="row">
+            <div class="col-md">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">吊臂长度</span>
+                    <input type="text" class="form-control" name="l" />
+                    <span class="input-group-text"><i>m</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">吊臂宽度</span>
+                    <input type="text" class="form-control" name="b" />
+                    <span class="input-group-text"><i>m</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">吊臂充实率</span>
+                    <input type="text" class="form-control" name="e" value="0.3" />
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">吊臂自重</span>
+                    <input type="text" class="form-control" name="gb" />
+                    <span class="input-group-text"><i>t</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">吊物重量</span>
+                    <input type="text" class="form-control" name="g" />
+                    <span class="input-group-text"><i>t</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">幅度</span>
+                    <input type="text" class="form-control" name="r" />
+                    <span class="input-group-text"><i>m</i></span>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">钩头含绳重量</span>
+                    <input type="text" class="form-control" name="gg" />
+                    <span class="input-group-text"><i>t</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">吊物偏摆角度</span>
+                    <input type="text" class="form-control" name="tg" value="0.05" />
+                    <span class="input-group-text"><i>(0.05-0.1)</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">工作状态计算风压</span>
+                    <input type="text" class="form-control" name="p" value="250" />
+                    <span class="input-group-text"><i>Pa</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">回转速度</span>
+                    <input type="text" class="form-control" name="n" value="0.6" />
+                    <span class="input-group-text"><i>rpm</i></span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">回转制动时间</span>
+                    <input type="text" class="form-control" name="t" value="4" />
+                    <span class="input-group-text"><i>s</i></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-grid col-md mx-auto mb-3">
+                <button id="clear" type="button" class="btn btn-danger btn-lg text-nowrap">
+                    清空
+                </button>
+            </div>
+            <div class="d-grid col-md mx-auto mb-3">
+                <button id="calc" type="submit" class="btn btn-primary btn-lg text-nowrap">
+                    计算
+                </button>
+            </div>
+        </div>
+        <div class="alert alert-info" id="result">
+            <ul>
+                <li>货物产生的偏摆力：<mark id="huo"></mark>t</li>
+                <li>吊臂所受侧向风载：<mark id="wind"></mark>t</li>
+                <li>吊臂切向惯性力：<mark id="db"></mark>t</li>
+                <li><strong>吊臂头部等效水平合力：<mark id="f"></mark>t</strong></li>
+            </ul>
+        </div>
+    </div>
+    <script src="/js/pianbai.js"></script>
+</body>
+
+</html>
