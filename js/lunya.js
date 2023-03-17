@@ -6,7 +6,7 @@ const nwm = Number(document.querySelector('input[name="nwm"]').value);
 const tg = Number(document.querySelector('input[name="tg"]').value);
 const xzg = Number(document.querySelector('input[name="xzg"]').value);
 const gmax = Number(document.querySelector('input[name="gmax"]').value);
-
+console.log(gmax);
 const calc = document.getElementById("calc"); //计算
 const clear = document.getElementById("clear"); //清空
 
@@ -44,6 +44,7 @@ function jisuan() {
     let fmax = 0;
     let fmin = 0;
     if (lunju * guiju > 0) {
+        console.log(glunju * guijumax);
         l = lunju * guiju / Math.sqrt(Math.pow(guiju, 2) + Math.pow(lunju, 2));
         fwmax = (tg + xzg + gmax) / 4 + wm / (2 * l);
         fwmin = (tg + xzg + gmax) / 4 - wm / (2 * l);
