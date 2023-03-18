@@ -1,4 +1,5 @@
 //四点加载8工况
+//2023-3-18 bug fixed;f_m should be f_mk
 function four8case() {
     mac += `
 X4 = 10000
@@ -19,96 +20,96 @@ FK,d,FZ,-f_v/4
         if (i == 1) {
             mac += `
 FK,a,FX,0
-FK,b,FX,f_m
+FK,b,FX,f_mk
 FK,c,FX,0
-FK,d,FX,-f_m
-FK,a,FY,-f_h/2-f_m
+FK,d,FX,-f_mk
+FK,a,FY,-f_h/2-f_mk
 FK,b,FY,-f_h/2
-FK,c,FY,f_m
+FK,c,FY,f_mk
 FK,d,FY,0
 `
         }
         if (i == 2) {
             mac += `
 FK,a,FX,0
-FK,b,FX,f_m+f_h/2.828
+FK,b,FX,f_mk+f_h/2.828
 FK,c,FX,f_h/2.828
-FK,d,FX,-f_m
-FK,a,FY,-f_h/2.828-f_m
+FK,d,FX,-f_mk
+FK,a,FY,-f_h/2.828-f_mk
 FK,b,FY,-f_h/2.828
-FK,c,FY,f_m
+FK,c,FY,f_mk
 FK,d,FY,0
 `
         }
         if (i == 3) {
             mac += `
 FK,a,FX,0
-FK,b,FX,f_m+f_h/2
+FK,b,FX,f_mk+f_h/2
 FK,c,FX,f_h/2
-FK,d,FX,-f_m
-FK,a,FY,-f_m
+FK,d,FX,-f_mk
+FK,a,FY,-f_mk
 FK,b,FY,0
-FK,c,FY,f_m
+FK,c,FY,f_mk
 FK,d,FY,0
 `
         }
         if (i == 4) {
             mac += `
 FK,a,FX,0
-FK,b,FX,f_m+f_h/2.828
+FK,b,FX,f_mk+f_h/2.828
 FK,c,FX,f_h/2.828
-FK,d,FX,-f_m
-FK,a,FY,-f_m
+FK,d,FX,-f_mk
+FK,a,FY,-f_mk
 FK,b,FY,0
-FK,c,FY,f_m+f_h/2.828
+FK,c,FY,f_mk+f_h/2.828
 FK,d,FY,f_h/2.828
 `
         }
         if (i == 5) {
             mac += `
 FK,a,FX,0
-FK,b,FX,f_m
+FK,b,FX,f_mk
 FK,c,FX,0
-FK,d,FX,-f_m
-FK,a,FY,-f_m
+FK,d,FX,-f_mk
+FK,a,FY,-f_mk
 FK,b,FY,0
-FK,c,FY,f_m+f_h/2
+FK,c,FY,f_mk+f_h/2
 FK,d,FY,f_h/2
 `
         }
         if (i == 6) {
             mac += `
 FK,a,FX,-f_h/2.828
-FK,b,FX,f_m
+FK,b,FX,f_mk
 FK,c,FX,0
-FK,d,FX,-f_m-f_h/2.828
-FK,a,FY,-f_m
+FK,d,FX,-f_mk-f_h/2.828
+FK,a,FY,-f_mk
 FK,b,FY,0
-FK,c,FY,f_m+f_h/2.828
+FK,c,FY,f_mk+f_h/2.828
 FK,d,FY,f_h/2.828
 `
         }
         if (i == 7) {
             mac += `
 FK,a,FX,-f_h/2
-FK,b,FX,f_m
+FK,b,FX,f_mk
 FK,c,FX,0
-FK,d,FX,-f_m-f_h/2
-FK,a,FY,-f_m
+FK,d,FX,-f_mk-f_h/2
+FK,a,FY,-f_mk
 FK,b,FY,0
-FK,c,FY,f_m
+FK,c,FY,f_mk
 FK,d,FY,0
 `
         }
         if (i == 8) {
             mac += `
 FK,a,FX,-f_h/2.828
-FK,b,FX,f_m
+FK,b,FX,f_mk
 FK,c,FX,0
-FK,d,FX,-f_m-f_h/2.828
-FK,a,FY,-f_m-f_h/2.828
+FK,d,FX,-f_mk-f_h/2.828
+FK,a,FY,-f_mk-f_h/2.828
 FK,b,FY,-f_h/2.828
-FK,c,FY,f_m
+FK,c,FY,f_mk
 FK,d,FY,0
 `
         }
@@ -124,7 +125,7 @@ SOLVE
             mac += `
 ALLSEL,ALL
 PLNSOL,U,X,0,1
-$shot
+${shot}
 *GET,temp${shotnum1},PLNSOL,0,MAX,,,
 *GET,temp${shotnum2},PLNSOL,0,MIN,,,
  `
@@ -135,7 +136,7 @@ $shot
             mac += `
 ALLSEL,ALL
 PLNSOL,U,Y,0,1
-$shot
+${shot}
 *GET,temp${shotnum1},PLNSOL,0,MAX,,,
 *GET,temp${shotnum2},PLNSOL,0,MIN,,,
  `
@@ -146,7 +147,7 @@ $shot
             mac += `
 ALLSEL,ALL
 PLNSOL,U,Z,0,1
-$shot
+${shot}
 *GET,temp${shotnum1},PLNSOL,0,MAX,,,
 *GET,temp${shotnum2},PLNSOL,0,MIN,,,
 `
@@ -157,7 +158,7 @@ $shot
             mac += `
 ALLSEL,ALL
 PLNSOL,U,SUM,0,1
-$shot
+${shot}
 *GET,temp${shotnum1},PLNSOL,0,MAX,,,
 *GET,temp${shotnum2},PLNSOL,0,MIN,,,
 `
@@ -168,7 +169,7 @@ $shot
             mac += `
 ALLSEL,ALL
 PLNSOL,S,EQV
-$shot
+${shot}
 *GET,temp${shotnum1},PLNSOL,0,MAX,,,
 *GET,temp${shotnum2},PLNSOL,0,MIN,,,
 `
@@ -184,7 +185,7 @@ CMSEL,S,CP${k}
 ESEL,ALL
 ESLL,S
 PLNSOL,U,X,0,1
-$shot
+${shot}
 *GET,temp${shotnum1},PLNSOL,0,MAX,,,
 *GET,temp${shotnum2},PLNSOL,0,MIN,,,
 `
@@ -197,7 +198,7 @@ CMSEL,S,CP${k}
 ESEL,ALL
 ESLL,S
 PLNSOL,U,Y,0,1
-$shot
+${shot}
 *GET,temp${shotnum1},PLNSOL,0,MAX,,,
 *GET,temp${shotnum2},PLNSOL,0,MIN,,,
 `
@@ -210,7 +211,7 @@ CMSEL,S,CP${k}
 ESEL,ALL
 ESLL,S
 PLNSOL,U,Z,0,1
-$shot
+${shot}
 *GET,temp${shotnum1},PLNSOL,0,MAX,,,
 *GET,temp${shotnum2},PLNSOL,0,MIN,,,
 `
@@ -223,7 +224,7 @@ CMSEL,S,CP${k}
 ESEL,ALL
 ESLL,S
 PLNSOL,U,SUM,0,1
-$shot
+${shot}
 *GET,temp${shotnum1},PLNSOL,0,MAX,,,
 *GET,temp${shotnum2},PLNSOL,0,MIN,,,
 `
@@ -236,7 +237,7 @@ CMSEL,S,CP${k}
 ESEL,ALL
 ESLL,S
 PLNSOL,S,EQV
-$shot
+${shot}
 *GET,temp${shotnum1},PLNSOL,0,MAX,,,
 *GET,temp${shotnum2},PLNSOL,0,MIN,,,
 `
