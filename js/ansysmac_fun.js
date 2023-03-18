@@ -387,9 +387,7 @@ temp${i}=0
 function output_mac(mac_var, name_var) {
     //output mac files and download
     let macfilename = name_var + '.mac';
-    console.log(macfilename);
-    console.log(mac_var);
-    const blob = new Blob([mac_var], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([mac_var], {type: "text/plain;charset=utf-8" });
     saveAs(blob, macfilename);
 }
 
