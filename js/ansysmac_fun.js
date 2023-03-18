@@ -112,8 +112,8 @@ function read_input() {
     }
     kp1 = Number(kp1_dom.value);
     kp2 = Number(kp2_dom.value);
-    kp3 = Number(kp2_dom.value);
-    kp4 = Number(kp2_dom.value);
+    kp3 = Number(kp3_dom.value);
+    kp4 = Number(kp4_dom.value);
 
     node1 = Number(node1_dom.value);
     node2 = Number(node2_dom.value);
@@ -260,8 +260,8 @@ f_h=${fs * 10000}
     }
     if (m && loadkpnum == 1) {
         mac += `
-    f_m=${m * 10000000}
-    `
+f_m=${m * 10000000}
+`
     }
     if (mk && loadkpnum == 1) {
         mac += `
@@ -270,8 +270,8 @@ f_mk=${mk * 10000000}
     }
     if (fmk && loadkpnum == 4) {
         mac += `
-    f_mk=${fmk * 10000}
-    `
+f_mk=${fmk * 10000}
+`
     }
 
 
@@ -380,7 +380,7 @@ temp${i}=0
     }
 
     output_mac(mac, macname);
-
+    output_py();
 
 }
 
