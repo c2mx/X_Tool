@@ -1,4 +1,4 @@
-const shot = `EOF
+const shot = `
 /SHOW,PNG,,0
 PNGR,COMP,1,-1
 PNGR,ORIENT,HORIZ
@@ -14,7 +14,7 @@ PNGR,TMOD,1
 /SHOW,CLOSE
 /DEVICE,VECTOR,0
 `
-const pyhead = `EOF
+const pyhead = `
 from docx import Document
 from docx.shared import Pt
 from docx.shared import Mm
