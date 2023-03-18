@@ -9,7 +9,7 @@ function output_py() {
 ${pyhead}
 print('通用8工况ANSYS有限元结果汇总')
 print('使用前自行确认可用性')
-$docformat
+${docformat}
 titlist = input('输入上级二级标题编号[例如4.1，4.2，4.3等]: ')
 while True:
     try:
@@ -365,11 +365,13 @@ calc_book.save(f'{filename}.docx')
 print(f'计算书生成结束，保存在程序目录下，文件名为{filename}.docx')
 
 `
-        //输出py脚本
-
         let pyfilename = macname + '.py';
-        const blob = new Blob([py8], { type: "text/plain;charset=utf-8" });
-        saveAs(blob, pyfilename);
+        const zip = new JSZip();
+        zip.file(pyfilename, py8);
+        zip.generateAsync({ type: "blob" }).then(function (content) {
+            saveAs(content, "python-scripts.zip");
+        });
+
 
     }//8工况结束
 
@@ -445,10 +447,6 @@ for k in range(0, ${ysnum}):
 print('反力图输出结束')
 
 `
-                //节点反力图脚本输出文件下载
-                let pyfilename = 'NS360.py';
-                const blob = new Blob([pyn360], { type: "text/plain;charset=utf-8" });
-                saveAs(blob, pyfilename);
 
 
 
@@ -566,10 +564,7 @@ for k in range(0, ${ysnum}):
 print('反弯矩图输出结束')
 
 `
-                //节点反力图脚本输出文件下载
-                let pyfilename = 'NS360.py';
-                const blob = new Blob([pyn360], { type: "text/plain;charset=utf-8" });
-                saveAs(blob, pyfilename);
+
 
             }
         }
@@ -616,13 +611,46 @@ for k in range(0, ${afnum}):
 print('结束')
 
 `
-            //杆件轴力图脚本输出文件下载
-            let pyfilename = 'ES360.py';
-            const blob = new Blob([pys360], { type: "text/plain;charset=utf-8" });
-            saveAs(blob, pyfilename);
 
 
         }//轴力图输出脚本--结束
+
+        if (rf == 1 && af == 1) {
+            //输出两个文件
+            //输出py脚本
+            let pyfilename1 = 'NS360.py';
+            let pyfilename2 = 'ES360.py';
+            const zip = new JSZip();
+            zip.file(pyfilename1, pyn360);
+            zip.file(pyfilename2, pys360);
+            zip.generateAsync({ type: "blob" }).then(function (content) {
+                saveAs(content, "python-scripts-360.zip");
+            });
+        }
+        else if (rf == 1 && af != 1) {
+            //仅节点反力
+            let pyfilename1 = 'NS360.py';
+            
+            const zip = new JSZip();
+            zip.file(pyfilename1, pyn360);
+            
+            zip.generateAsync({ type: "blob" }).then(function (content) {
+                saveAs(content, "python-scripts-360.zip");
+            });
+        }
+        else if (rf != 1 && af == 1) {
+            //仅轴力
+            
+            let pyfilename2 = 'ES360.py';
+            const zip = new JSZip();
+           
+            zip.file(pyfilename2, pys360);
+            zip.generateAsync({ type: "blob" }).then(function (content) {
+                saveAs(content, "python-scripts-360.zip");
+            });
+        }
+
+
     }//360工况输出脚本--结束
 
 
