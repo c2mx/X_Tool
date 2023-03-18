@@ -1,3 +1,4 @@
+//全局变量
 const macname_dom = document.querySelector('input[name="macname"]');//宏文件名
 let macname = '';
 let loadkpnum = 0; //加载点数量
@@ -92,8 +93,9 @@ let rstcol = 0;
 //定义mac宏文件变量
 let mac = '';
 
+//读取页面输入的参数
 function read_input() {
-    macname = macname_dom.textContent;
+    macname = macname_dom.value;
 
     if (document.querySelector('input[id="load4"]').checked == true) {
         loadkpnum = 4;
@@ -108,19 +110,19 @@ function read_input() {
     } else {
         casenum = 360;
     }
-    kp1 = Number(kp1_dom.textContent);
-    kp2 = Number(kp2_dom.textContent);
-    kp3 = Number(kp2_dom.textContent);
-    kp4 = Number(kp2_dom.textContent);
+    kp1 = Number(kp1_dom.value);
+    kp2 = Number(kp2_dom.value);
+    kp3 = Number(kp2_dom.value);
+    kp4 = Number(kp2_dom.value);
 
-    node1 = Number(node1_dom.textContent);
-    node2 = Number(node2_dom.textContent);
-    node3 = Number(node3_dom.textContent);
-    node4 = Number(node4_dom.textContent);
-    node5 = Number(node5_dom.textContent);
-    node6 = Number(node6_dom.textContent);
-    node7 = Number(node7_dom.textContent);
-    node8 = Number(node8_dom.textContent);
+    node1 = Number(node1_dom.value);
+    node2 = Number(node2_dom.value);
+    node3 = Number(node3_dom.value);
+    node4 = Number(node4_dom.value);
+    node5 = Number(node5_dom.value);
+    node6 = Number(node6_dom.value);
+    node7 = Number(node7_dom.value);
+    node8 = Number(node8_dom.value);
 
     if (document.querySelector('input[id="fix"]').checked == false) {
         fix = 0;
@@ -128,11 +130,11 @@ function read_input() {
         fix = 1;
     }
 
-    fv = Number(fv_dom.textContent);
-    fs = Number(fs_dom.textContent);
-    m = Number(m_dom.textContent);
-    mk = Number(mk_dom.textContent);
-    fmk = Number(fmk_dom.textContent);
+    fv = Number(fv_dom.value);
+    fs = Number(fs_dom.value);
+    m = Number(m_dom.value);
+    mk = Number(mk_dom.value);
+    fmk = Number(fmk_dom.value);
 
     if (document.querySelector('input[id="rf"]').checked == true) {
         rf = 1;
@@ -154,14 +156,14 @@ function read_input() {
 
     afnum = Number(document.querySelector('select[id="sel2"]').selectedIndex);
 
-    elem1 = Number(elem1_dom.textContent);
-    elem2 = Number(elem2_dom.textContent);
-    elem3 = Number(elem3_dom.textContent);
-    elem4 = Number(elem4_dom.textContent);
-    elem5 = Number(elem5_dom.textContent);
-    elem6 = Number(elem6_dom.textContent);
-    elem7 = Number(elem7_dom.textContent);
-    elem8 = Number(elem8_dom.textContent);
+    elem1 = Number(elem1_dom.value);
+    elem2 = Number(elem2_dom.value);
+    elem3 = Number(elem3_dom.value);
+    elem4 = Number(elem4_dom.value);
+    elem5 = Number(elem5_dom.value);
+    elem6 = Number(elem6_dom.value);
+    elem7 = Number(elem7_dom.value);
+    elem8 = Number(elem8_dom.value);
 
     if (document.querySelector('input[name="dfx"]').checked == true) {
         dfx = 1;
@@ -228,7 +230,7 @@ function read_input() {
     mac = '';
 }
 
-
+//生成脚本文件并下载
 function make_mac() {
     read_input();
     //加载点
@@ -377,9 +379,20 @@ temp${i}=0
         four8case();
     }
 
-    
+    output_mac(mac, macname);
+
+
+}
+
+function output_mac(mac_var, name_var) {
+    //output mac files and download
+    let macfilename = name_var + '.mac';
+    console.log(macfilename);
+    console.log(mac_var);
+    const blob = new Blob([mac_var], { type: "text/plain;charset=utf-8" });
+    saveAs(blob, macfilename);
 }
 
 
-
+document.getElementById("make_script").addEventListener("click", make_mac);
 
