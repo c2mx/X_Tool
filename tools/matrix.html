@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>X-Tool 工具箱</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-icons/1.10.3/font/bootstrap-icons.css" />
+  <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.staticfile.org/sylvester/0.1.3/sylvester.js"></script>
+</head>
+
+<body>
+  <div class="container-sm p-3">
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link" href="/">首页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tools/ansysmac.html">宏生成</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tools/lunya.html">轮压计算</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tools/pianbai.html">等效侧向力</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tools/compress_member.html">压杆校核</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tools/win10.html">Win10激活</a>
+        </li>
+      </ul>
+      <h1 class="text-center bi-gear-wide-connected p-3"> 矩阵求解</h1>
+     <script>
+        let h1 = 42.3;
+        let h2 = 72.3;
+        let h3 = 102.3;
+        let h4 = 134.8;
+        let h5 = 168.1;
+
+        let m1 = 972;
+        let m2 = 972;
+        let m3 = 972;
+        let m4 = 972;
+        let m5 = 1216;
+
+        let d11 = (h1**3)/3;
+        let d12 = (h1**2)*(3*h2-h1)/6;
+        let d13 = (h1**2)*(3*h3-h1)/6;
+        let d14 = (h1**2)*(3*h4-h1)/6;
+        let d15 = (h1**2)*(3*h5-h1)/6;
+        let d22 = (h2**3)/3;
+        let d23 = (h2**2)*(3*h3-h2)/6;
+        let d24 = (h2**2)*(3*h4-h2)/6;
+        let d25 = (h2**2)*(3*h5-h2)/6;
+        let d33 = (h3**3)/3;
+        let d34 = (h3**2)*(3*h4-h3)/6;
+        let d35 = (h3**2)*(3*h5-h3)/6;
+        let d44 = (h4**3)/3;
+        let d45 = (h4**2)*(3*h5-h4)/6;
+        let d55 = (h5**3)/3;
+
+        let D5 = $M([
+            [d11,d12,d13,d14,d15],
+            [d12,d22,d23,d24,d25],
+            [d13,d23,d33,d34,d35],
+            [d14,d24,d34,d44,d45],
+            [d15,d25,d35,d45,d55]
+        ]);
+        let D4 = $M([
+            [d11,d12,d13,d14],
+            [d12,d22,d23,d24],
+            [d13,d23,d33,d34],
+            [d14,d24,d34,d44]
+        ]);
+        let D3 = $M([
+            [d11,d12,d13],
+            [d12,d22,d23],
+            [d13,d23,d33]
+        ]);
+        let D2 = $M([
+            [d11,d12],
+            [d12,d22]
+        ]);
+        let D1 = $M([d11]);
+
+        let DM5 = $M([0.5*m5*h1**2,0.5*m5*h2**2,0.5*m5*h3**2,0.5*m5*h4**2,0.5*m5*h5**2]);
+        let DM4 = $M([0.5*m4*h1**2,0.5*m4*h2**2,0.5*m4*h3**2,0.5*m4*h4**2]);
+        let DM3 = $M([0.5*m3*h1**2,0.5*m3*h2**2,0.5*m3*h3**2]);
+        let DM2 = $M([0.5*m2*h1**2,0.5*m2*h2**2]);
+        let DM1 = $M([0.5*m1*h1**2]);
+
+        let x5 = D5.inverse().x(DM5);
+        let x4 = D4.inverse().x(DM4);
+        let x3 = D3.inverse().x(DM3);
+        let x2 = D2.inverse().x(DM2);
+        //let x1 = D1.inverse().x(DM1);
+        let x1 = (0.5*m1*h1**2)/d11;
+
+        console.log(x5);
+        console.log(x4);
+        console.log(x3);
+        console.log(x2);
+        console.log(x1);
+
+        
+     </script>
+   
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 mb-md-0 text-muted">&copy; 2023 Made with <i class="bi bi-heart-fill text-danger"></i> by Xu Ming</span>
+      </div>
+    </footer>
+
+  </div>
+</body>
+
+</html>
