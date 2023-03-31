@@ -10,110 +10,476 @@
   <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
   <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.staticfile.org/sylvester/0.1.3/sylvester.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ["\\(", "\\)"]],
+            displayMath: [['$$', '$$'], ["\\[", "\\]"]]
+        }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </head>
 
 <body>
   <div class="container-sm p-3">
     <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link" href="/">首页</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/tools/ansysmac.html">宏生成</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/tools/lunya.html">轮压计算</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/tools/pianbai.html">等效侧向力</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/tools/compress_member.html">压杆校核</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/tools/win10.html">Win10激活</a>
-        </li>
-      </ul>
-      <h1 class="text-center bi-gear-wide-connected p-3"> 附着反力-矩阵求解</h1>
-     <script>
-        let h1 = 42.3;
-        let h2 = 72.3;
-        let h3 = 102.3;
-        let h4 = 134.8;
-        let h5 = 168.1;
+      <li class="nav-item">
+        <a class="nav-link" href="/">首页</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tools/ansysmac.html">宏生成</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tools/lunya.html">轮压计算</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tools/pianbai.html">等效侧向力</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tools/compress_member.html">压杆校核</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tools/win10.html">Win10激活</a>
+      </li>
+    </ul>
+    <h1 class="text-center bi-gear-wide-connected p-3"> 附着反力-矩阵求解</h1>
 
-        let m1 = 972;
-        let m2 = 972;
-        let m3 = 972;
-        let m4 = 972;
-        let m5 = 1216;
+    <p>附着处的合反力由几部分构成，第一个是悬臂以上结构的不平衡弯矩M产生的附着反力，第二个是悬臂以上结构所受的风载水平力，第三个是两层附着之间部分塔身所受风载的一半。</p>
+    <p>将多层附着塔身模型简化为刚性支座的连续梁，由于底部固定，因此附着几道，就是几次超静定结构。</p>
+    <p>本文只计算不平衡弯矩M产生的附着反力。</p>
+    <img src="../images/fuzhuomodel.png" alt="">
 
-        let d11 = (h1**3)/3;
-        let d12 = (h1**2)*(3*h2-h1)/6;
-        let d13 = (h1**2)*(3*h3-h1)/6;
-        let d14 = (h1**2)*(3*h4-h1)/6;
-        let d15 = (h1**2)*(3*h5-h1)/6;
-        let d22 = (h2**3)/3;
-        let d23 = (h2**2)*(3*h3-h2)/6;
-        let d24 = (h2**2)*(3*h4-h2)/6;
-        let d25 = (h2**2)*(3*h5-h2)/6;
-        let d33 = (h3**3)/3;
-        let d34 = (h3**2)*(3*h4-h3)/6;
-        let d35 = (h3**2)*(3*h5-h3)/6;
-        let d44 = (h4**3)/3;
-        let d45 = (h4**2)*(3*h5-h4)/6;
-        let d55 = (h5**3)/3;
-
-        let D5 = $M([
-            [d11,d12,d13,d14,d15],
-            [d12,d22,d23,d24,d25],
-            [d13,d23,d33,d34,d35],
-            [d14,d24,d34,d44,d45],
-            [d15,d25,d35,d45,d55]
-        ]);
-        let D4 = $M([
-            [d11,d12,d13,d14],
-            [d12,d22,d23,d24],
-            [d13,d23,d33,d34],
-            [d14,d24,d34,d44]
-        ]);
-        let D3 = $M([
-            [d11,d12,d13],
-            [d12,d22,d23],
-            [d13,d23,d33]
-        ]);
+    <h2>仅有一道附着的情况</h2>
+    <p>$$\frac{H_{1}^{3}}{3EI}P_1 = \frac{MH_{1}^{2}}{2EI}$$</p>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$M$</span>
+          <input type="text" class="form-control" placeholder="" name="m1" />
+          <span class="input-group-text"><i>$t·m$</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_1$</span>
+          <input type="text" class="form-control" placeholder="" name="h11" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-12 d-grid mx-auto mb-3">
+        <button id="calc1" type="submit" class="btn btn-primary text-nowrap">
+          计算
+        </button>
+      </div>
+      <div class="col-md-12 mb-3">
+        <div class="alert alert-success mb-3">
+          <p id="result1"></p>
+        </div>
+      </div>
+    </div>
+    <h2>有两道附着的情况</h2>
+    <p>
+      $$
+      \begin{bmatrix}
+      \frac{H_{1}^{3}}{3EI} & \frac{H_{1}^{2}(3H_2-H_1)}{6EI} \\\\
+      \frac{H_{1}^{2}(3H_2-H_1)}{6EI} & \frac{H_{2}^{3}}{3EI} \\\\
+      \end{bmatrix}
+      \begin{bmatrix}
+      P_1 \\\\
+      P_2 \\\\
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+      \frac{MH_{1}^{2}}{2EI} \\\\
+      \frac{MH_{2}^{2}}{2EI} \\\\
+      \end{bmatrix}
+      $$
+    </p>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$M$</span>
+          <input type="text" class="form-control" placeholder="" name="m2" />
+          <span class="input-group-text"><i>$t·m$</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_1$</span>
+          <input type="text" class="form-control" placeholder="" name="h12" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_2$</span>
+          <input type="text" class="form-control" placeholder="" name="h22" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-12 d-grid mx-auto mb-3">
+        <button id="calc2" type="submit" class="btn btn-primary text-nowrap">
+          计算
+        </button>
+      </div>
+      <div class="col-md-12 mb-3">
+        <div class="alert alert-success mb-3">
+          <p id="result2"></p>
+        </div>
+      </div>
+    </div>
+    <h2>有三道附着的情况</h2>
+    <p>
+      $$
+      \begin{bmatrix}
+      \frac{H_{1}^{3}}{3EI} & \frac{H_{1}^{2}(3H_2-H_1)}{6EI} & \frac{H_{1}^{2}(3H_3-H_1)}{6EI} \\\\
+      \frac{H_{1}^{2}(3H_2-H_1)}{6EI} & \frac{H_{2}^{3}}{3EI} & \frac{H_{2}^{2}(3H_3-H_2)}{6EI} \\\\
+      \frac{H_{1}^{2}(3H_3-H_1)}{6EI} & \frac{H_{2}^{2}(3H_3-H_2)}{6EI} & \frac{H_{3}^{3}}{3EI} \\\\
+      \end{bmatrix}
+      \begin{bmatrix}
+      P_1 \\\\
+      P_2 \\\\
+      P_3 \\\\
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+      \frac{MH_{1}^{2}}{2EI} \\\\
+      \frac{MH_{2}^{2}}{2EI} \\\\
+      \frac{MH_{3}^{2}}{2EI} \\\\
+      \end{bmatrix}
+      $$
+    </p>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$M$</span>
+          <input type="text" class="form-control" placeholder="" name="m3" />
+          <span class="input-group-text"><i>$t·m$</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_1$</span>
+          <input type="text" class="form-control" placeholder="" name="h13" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_2$</span>
+          <input type="text" class="form-control" placeholder="" name="h23" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_3$</span>
+          <input type="text" class="form-control" placeholder="" name="h33" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-12 d-grid mx-auto mb-3">
+        <button id="calc3" type="submit" class="btn btn-primary text-nowrap">
+          计算
+        </button>
+      </div>
+      <div class="col-md-12 mb-3">
+        <div class="alert alert-success mb-3">
+          <p id="result3"></p>
+        </div>
+      </div>
+    </div>
+    <h2>有四道附着的情况</h2>
+    <p>
+      $$
+      \begin{bmatrix}
+      \frac{H_{1}^{3}}{3EI} & \frac{H_{1}^{2}(3H_2-H_1)}{6EI} & \frac{H_{1}^{2}(3H_3-H_1)}{6EI} &
+      \frac{H_{1}^{2}(3H_4-H_1)}{6EI} \\\\
+      \frac{H_{1}^{2}(3H_2-H_1)}{6EI} & \frac{H_{2}^{3}}{3EI} & \frac{H_{2}^{2}(3H_3-H_2)}{6EI} &
+      \frac{H_{2}^{2}(3H_4-H_2)}{6EI} \\\\
+      \frac{H_{1}^{2}(3H_3-H_1)}{6EI} & \frac{H_{2}^{2}(3H_3-H_2)}{6EI} & \frac{H_{3}^{3}}{3EI} &
+      \frac{H_{3}^{2}(3H_4-H_3)}{6EI} \\\\
+      \frac{H_{1}^{2}(3H_4-H_1)}{6EI} & \frac{H_{2}^{2}(3H_4-H_2)}{6EI} & \frac{H_{3}^{2}(3H_4-H_3)}{6EI} &
+      \frac{H_{4}^{3}}{3EI} \\\\
+      \end{bmatrix}
+      \begin{bmatrix}
+      P_1 \\\\
+      P_2 \\\\
+      P_3 \\\\
+      P_4 \\\\
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+      \frac{MH_{1}^{2}}{2EI} \\\\
+      \frac{MH_{2}^{2}}{2EI} \\\\
+      \frac{MH_{3}^{2}}{2EI} \\\\
+      \frac{MH_{4}^{2}}{2EI} \\\\
+      \end{bmatrix}
+      $$
+    </p>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$M$</span>
+          <input type="text" class="form-control" placeholder="" name="m4" />
+          <span class="input-group-text"><i>$t·m$</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_1$</span>
+          <input type="text" class="form-control" placeholder="" name="h14" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_2$</span>
+          <input type="text" class="form-control" placeholder="" name="h24" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_3$</span>
+          <input type="text" class="form-control" placeholder="" name="h34" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_4$</span>
+          <input type="text" class="form-control" placeholder="" name="h44" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-12 d-grid mx-auto mb-3">
+        <button id="calc4" type="submit" class="btn btn-primary text-nowrap">
+          计算
+        </button>
+      </div>
+      <div class="col-md-12 mb-3">
+        <div class="alert alert-success mb-3">
+          <p id="result4"></p>
+        </div>
+      </div>
+    </div>
+    <h2>有五道附着的情况</h2>
+    <p>
+      $$
+      \begin{bmatrix}
+      \frac{H_{1}^{3}}{3EI} & \frac{H_{1}^{2}(3H_2-H_1)}{6EI} & \frac{H_{1}^{2}(3H_3-H_1)}{6EI} &
+      \frac{H_{1}^{2}(3H_4-H_1)}{6EI} & \frac{H_{1}^{2}(3H_5-H_1)}{6EI} \\\\
+      \frac{H_{1}^{2}(3H_2-H_1)}{6EI} & \frac{H_{2}^{3}}{3EI} & \frac{H_{2}^{2}(3H_3-H_2)}{6EI} &
+      \frac{H_{2}^{2}(3H_4-H_2)}{6EI} & \frac{H_{2}^{2}(3H_5-H_2)}{6EI} \\\\
+      \frac{H_{1}^{2}(3H_3-H_1)}{6EI} & \frac{H_{2}^{2}(3H_3-H_2)}{6EI} & \frac{H_{3}^{3}}{3EI} &
+      \frac{H_{3}^{2}(3H_4-H_3)}{6EI} & \frac{H_{3}^{2}(3H_5-H_3)}{6EI} \\\\
+      \frac{H_{1}^{2}(3H_4-H_1)}{6EI} & \frac{H_{2}^{2}(3H_4-H_2)}{6EI} & \frac{H_{3}^{2}(3H_4-H_3)}{6EI} &
+      \frac{H_{4}^{3}}{3EI} & \frac{H_{4}^{2}(3H_5-H_3)}{6EI} \\\\
+      \frac{H_{1}^{2}(3H_5-H_1)}{6EI} & \frac{H_{2}^{2}(3H_5-H_2)}{6EI} & \frac{H_{3}^{2}(3H_5-H_3)}{6EI} &
+      \frac{H_{4}^{2}(3H_5-H_3)}{6EI} & \frac{H_{5}^{3}}{3EI} \\\\
+      \end{bmatrix}
+      \begin{bmatrix}
+      P_1 \\\\
+      P_2 \\\\
+      P_3 \\\\
+      P_4 \\\\
+      P_5 \\\\
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+      \frac{MH_{1}^{2}}{2EI} \\\\
+      \frac{MH_{2}^{2}}{2EI} \\\\
+      \frac{MH_{3}^{2}}{2EI} \\\\
+      \frac{MH_{4}^{2}}{2EI} \\\\
+      \frac{MH_{5}^{2}}{2EI} \\\\
+      \end{bmatrix}
+      $$
+    </p>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$M$</span>
+          <input type="text" class="form-control" placeholder="" name="m5" />
+          <span class="input-group-text"><i>$t·m$</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_1$</span>
+          <input type="text" class="form-control" placeholder="" name="h15" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_2$</span>
+          <input type="text" class="form-control" placeholder="" name="h25" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_3$</span>
+          <input type="text" class="form-control" placeholder="" name="h35" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_4$</span>
+          <input type="text" class="form-control" placeholder="" name="h45" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="input-group">
+          <span class="input-group-text">$H_5$</span>
+          <input type="text" class="form-control" placeholder="" name="h55" />
+          <span class="input-group-text"><i>m</i></span>
+        </div>
+      </div>
+      <div class="col-md-12 d-grid mx-auto mb-3">
+        <button id="calc5" type="submit" class="btn btn-primary text-nowrap">
+          计算
+        </button>
+      </div>
+      <div class="col-md-12 mb-3">
+        <div class="alert alert-success mb-3">
+          <p id="result5"></p>
+        </div>
+      </div>
+    </div>
+    <script>
+      function jisuan1() {
+        let h1 = Number(document.querySelector('input[name="h11"]').value);
+        let m1 = Number(document.querySelector('input[name="m1"]').value);
+        let d11 = (h1 ** 3) / 3;
+        let p1 = (0.5 * m1 * h1 ** 2) / d11;
+        p1 = p1.toFixed(1);
+        document.getElementById("result1").textContent = `$$P_1 = ${p1} t$$`;
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
+      function jisuan2() {
+        let h1 = Number(document.querySelector('input[name="h12"]').value);
+        let h2 = Number(document.querySelector('input[name="h22"]').value);
+        let m2 = Number(document.querySelector('input[name="m2"]').value);
+        let d11 = (h1 ** 3) / 3;
+        let d12 = (h1 ** 2) * (3 * h2 - h1) / 6;
+        let d22 = (h2 ** 3) / 3;
         let D2 = $M([
-            [d11,d12],
-            [d12,d22]
+          [d11, d12],
+          [d12, d22]
         ]);
-        let D1 = $M([d11]);
-
-        let DM5 = $M([0.5*m5*h1**2,0.5*m5*h2**2,0.5*m5*h3**2,0.5*m5*h4**2,0.5*m5*h5**2]);
-        let DM4 = $M([0.5*m4*h1**2,0.5*m4*h2**2,0.5*m4*h3**2,0.5*m4*h4**2]);
-        let DM3 = $M([0.5*m3*h1**2,0.5*m3*h2**2,0.5*m3*h3**2]);
-        let DM2 = $M([0.5*m2*h1**2,0.5*m2*h2**2]);
-        let DM1 = $M([0.5*m1*h1**2]);
-
-        let x5 = D5.inverse().x(DM5);
-        let x4 = D4.inverse().x(DM4);
-        let x3 = D3.inverse().x(DM3);
+        let DM2 = $M([0.5 * m2 * h1 ** 2, 0.5 * m2 * h2 ** 2]);
         let x2 = D2.inverse().x(DM2);
-        //let x1 = D1.inverse().x(DM1);
-        let x1 = (0.5*m1*h1**2)/d11;
+        document.getElementById("result2").textContent = `$$P_1 = ${Number(x2.elements[0]).toFixed(1)} t, P_2 = ${Number(x2.elements[1]).toFixed(1)} t$$`;
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
+      function jisuan3() {
+        let h1 = Number(document.querySelector('input[name="h13"]').value);
+        let h2 = Number(document.querySelector('input[name="h23"]').value);
+        let h3 = Number(document.querySelector('input[name="h33"]').value);
+        let m3 = Number(document.querySelector('input[name="m3"]').value);
 
-        console.log(x5);
-        console.log(x4);
-        console.log(x3);
-        console.log(x2);
-        console.log(x1);
+        let d11 = (h1 ** 3) / 3;
+        let d12 = (h1 ** 2) * (3 * h2 - h1) / 6;
+        let d13 = (h1 ** 2) * (3 * h3 - h1) / 6;
 
-        
-     </script>
-   
+        let d22 = (h2 ** 3) / 3;
+        let d23 = (h2 ** 2) * (3 * h3 - h2) / 6;
+
+        let d33 = (h3 ** 3) / 3;
+
+        let D3 = $M([
+          [d11, d12, d13],
+          [d12, d22, d23],
+          [d13, d23, d33]
+        ]);
+        let DM3 = $M([0.5 * m3 * h1 ** 2, 0.5 * m3 * h2 ** 2, 0.5 * m3 * h3 ** 2]);
+        let x3 = D3.inverse().x(DM3);
+        document.getElementById("result3").textContent = `$$P_1 = ${Number(x3.elements[0]).toFixed(1)} t, P_2 = ${Number(x3.elements[1]).toFixed(1)} t, P_3 = ${Number(x3.elements[2]).toFixed(1)} t$$`;
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
+      function jisuan4() {
+        let h1 = Number(document.querySelector('input[name="h14"]').value);
+        let h2 = Number(document.querySelector('input[name="h24"]').value);
+        let h3 = Number(document.querySelector('input[name="h34"]').value);
+        let h4 = Number(document.querySelector('input[name="h44"]').value);
+        let m4 = Number(document.querySelector('input[name="m4"]').value);
+        let d11 = (h1 ** 3) / 3;
+        let d12 = (h1 ** 2) * (3 * h2 - h1) / 6;
+        let d13 = (h1 ** 2) * (3 * h3 - h1) / 6;
+        let d14 = (h1 ** 2) * (3 * h4 - h1) / 6;
+
+        let d22 = (h2 ** 3) / 3;
+        let d23 = (h2 ** 2) * (3 * h3 - h2) / 6;
+        let d24 = (h2 ** 2) * (3 * h4 - h2) / 6;
+
+        let d33 = (h3 ** 3) / 3;
+        let d34 = (h3 ** 2) * (3 * h4 - h3) / 6;
+
+        let d44 = (h4 ** 3) / 3;
+
+        let D4 = $M([
+          [d11, d12, d13, d14],
+          [d12, d22, d23, d24],
+          [d13, d23, d33, d34],
+          [d14, d24, d34, d44]
+        ]);
+        let DM4 = $M([0.5 * m4 * h1 ** 2, 0.5 * m4 * h2 ** 2, 0.5 * m4 * h3 ** 2, 0.5 * m4 * h4 ** 2]);
+        let x4 = D4.inverse().x(DM4);
+        document.getElementById("result4").textContent = `$$P_1 = ${Number(x4.elements[0]).toFixed(1)} t, P_2 = ${Number(x4.elements[1]).toFixed(1)} t, P_3 = ${Number(x4.elements[2]).toFixed(1)} t , P_4 = ${Number(x4.elements[3]).toFixed(1)} t$$`;
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
+      function jisuan5() {
+        let h1 = Number(document.querySelector('input[name="h15"]').value);
+        let h2 = Number(document.querySelector('input[name="h25"]').value);
+        let h3 = Number(document.querySelector('input[name="h35"]').value);
+        let h4 = Number(document.querySelector('input[name="h45"]').value);
+        let h5 = Number(document.querySelector('input[name="h55"]').value);
+        let m5 = Number(document.querySelector('input[name="m5"]').value);
+        let d11 = (h1 ** 3) / 3;
+        let d12 = (h1 ** 2) * (3 * h2 - h1) / 6;
+        let d13 = (h1 ** 2) * (3 * h3 - h1) / 6;
+        let d14 = (h1 ** 2) * (3 * h4 - h1) / 6;
+        let d15 = (h1 ** 2) * (3 * h5 - h1) / 6;
+        let d22 = (h2 ** 3) / 3;
+        let d23 = (h2 ** 2) * (3 * h3 - h2) / 6;
+        let d24 = (h2 ** 2) * (3 * h4 - h2) / 6;
+        let d25 = (h2 ** 2) * (3 * h5 - h2) / 6;
+        let d33 = (h3 ** 3) / 3;
+        let d34 = (h3 ** 2) * (3 * h4 - h3) / 6;
+        let d35 = (h3 ** 2) * (3 * h5 - h3) / 6;
+        let d44 = (h4 ** 3) / 3;
+        let d45 = (h4 ** 2) * (3 * h5 - h4) / 6;
+        let d55 = (h5 ** 3) / 3;
+        let D5 = $M([
+          [d11, d12, d13, d14, d15],
+          [d12, d22, d23, d24, d25],
+          [d13, d23, d33, d34, d35],
+          [d14, d24, d34, d44, d45],
+          [d15, d25, d35, d45, d55]
+        ]);
+        let DM5 = $M([0.5 * m5 * h1 ** 2, 0.5 * m5 * h2 ** 2, 0.5 * m5 * h3 ** 2, 0.5 * m5 * h4 ** 2, 0.5 * m5 * h5 ** 2]);
+        let x5 = D5.inverse().x(DM5);
+        document.getElementById("result5").textContent = `$$P_1 = ${Number(x5.elements[0]).toFixed(1)} t, P_2 = ${Number(x5.elements[1]).toFixed(1)} t, P_3 = ${Number(x5.elements[2]).toFixed(1)} t , P_4 = ${Number(x5.elements[3]).toFixed(1)} t , P_5 = ${Number(x5.elements[4]).toFixed(1)} t$$`;
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
+
+      document.getElementById("calc1").addEventListener("click", jisuan1);
+      document.getElementById("calc2").addEventListener("click", jisuan2);
+      document.getElementById("calc3").addEventListener("click", jisuan3);
+      document.getElementById("calc4").addEventListener("click", jisuan4);
+      document.getElementById("calc5").addEventListener("click", jisuan5);
+    </script>
+
 
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
       <div class="col-md-4 d-flex align-items-center">
-        <span class="mb-3 mb-md-0 text-muted">&copy; 2023 Made with <i class="bi bi-heart-fill text-danger"></i> by Xu Ming</span>
+        <span class="mb-3 mb-md-0 text-muted">&copy; 2023 Made with <i class="bi bi-heart-fill text-danger"></i> by Xu
+          Ming</span>
       </div>
     </footer>
 
