@@ -122,7 +122,7 @@ function jisuan() {
         sigma = f / mj;
         //长细比超过250则查表无数据
         if (Math.ceil(lambda / xishu) > 250) {
-            document.getElementById("result").style.display = "";
+            document.getElementById("result").style.display = "none";
             document.getElementById("nowork").style.display = "";
             document.getElementById("out_docx").style.display = "none";
             document.getElementById("work").style.display = "none";
@@ -177,7 +177,7 @@ function jisuan() {
         sigma = f / mj;
         //长细比超过250则查表无数据
         if (Math.ceil(lambda / xishu) > 250) {
-            document.getElementById("result").style.display = "";
+            document.getElementById("result").style.display = "none";
             document.getElementById("nowork").style.display = "";
             document.getElementById("out_docx").style.display = "none";
             document.getElementById("work").style.display = "none";
