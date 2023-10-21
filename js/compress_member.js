@@ -124,6 +124,7 @@ function jisuan() {
         if (Math.ceil(lambda / xishu) > 250) {
             document.getElementById("result").style.display = "none";
             document.getElementById("nowork").style.display = "";
+            document.getElementById("toolong").style.display = "";
             document.getElementById("out_docx").style.display = "none";
             document.getElementById("work").style.display = "none";
         }
@@ -156,12 +157,14 @@ function jisuan() {
                 document.getElementById("out_docx").style.display = "";
                 document.getElementById("work").style.display = "";
                 document.getElementById("nowork").style.display = "none";
+                document.getElementById("toolong").style.display = "none";
 
             } else {//不满足规范
                 document.getElementById("result").style.display = "";
                 document.getElementById("nowork").style.display = "";
                 document.getElementById("out_docx").style.display = "none";
                 document.getElementById("work").style.display = "none";
+                document.getElementById("toolong").style.display = "none";
             }
 
         }
@@ -181,6 +184,7 @@ function jisuan() {
             document.getElementById("nowork").style.display = "";
             document.getElementById("out_docx").style.display = "none";
             document.getElementById("work").style.display = "none";
+            document.getElementById("toolong").style.display = "";
         }
         else {
             psi_val = psi_table[Math.ceil(lambda / xishu)];
@@ -211,12 +215,14 @@ function jisuan() {
                 document.getElementById("out_docx").style.display = "";
                 document.getElementById("work").style.display = "";
                 document.getElementById("nowork").style.display = "none";
+                document.getElementById("toolong").style.display = "none";
         
             } else {//不满足规范
                 document.getElementById("result").style.display = "";
                 document.getElementById("nowork").style.display = "";
                 document.getElementById("out_docx").style.display = "none";
                 document.getElementById("work").style.display = "none";
+                document.getElementById("toolong").style.display = "none";
             }
         }
 

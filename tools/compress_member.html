@@ -29,6 +29,7 @@
             document.getElementById("out_docx").style.display = "none";
             document.getElementById("work").style.display = "none";
             document.getElementById("nowork").style.display = "none";
+            document.getElementById("toolong").style.display = "none";
         };
     </script>
 </head>
@@ -157,6 +158,9 @@
             <div class="d-grid col mx-auto mb-3">
                 <div class="alert alert-danger" id="nowork">
                     <strong>不满足规范</strong>
+                </div>
+                <div class="alert alert-danger" id="toolong">
+                    <strong>长细比太大!</strong>
                 </div>
                 <div class="alert alert-success" id="work">
                     <strong>满足规范</strong>
