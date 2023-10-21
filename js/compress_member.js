@@ -120,29 +120,53 @@ function jisuan() {
         mass = mj * 1000 * 7850 * 10 ** -9;
         lambda = l / hzbj;
         sigma = f / mj;
-        psi_val = psi_table[Math.ceil(lambda / xishu)];
-        wdx = sigma / Number(psi_val);
+        //长细比超过250则查表无数据
+        if (Math.ceil(lambda / xishu) > 250) {
+            document.getElementById("result").style.display = "";
+            document.getElementById("nowork").style.display = "";
+            document.getElementById("out_docx").style.display = "none";
+            document.getElementById("work").style.display = "none";
+        }
+        else {
+            psi_val = psi_table[Math.ceil(lambda / xishu)];
+            wdx = sigma / Number(psi_val);
 
-        if (steel.value === "Q345B") {
-            if (pt <= 16) { fp = 310 }
-            else if (pt > 16 && pt <= 35) { fp = 295 }
-            else if (pt > 35 && pt <= 50) { fp = 265 }
-            else { fp = 250 }
-        } else {
-            if (pt <= 16) { fp = 215 }
-            else if (pt > 16 && pt <= 40) { fp = 205 }
-            else if (pt > 40 && pt <= 60) { fp = 200 }
-            else { fp = 190 }
+            if (steel.value === "Q345B") {
+                if (pt <= 16) { fp = 310 }
+                else if (pt > 16 && pt <= 35) { fp = 295 }
+                else if (pt > 35 && pt <= 50) { fp = 265 }
+                else { fp = 250 }
+            } else {
+                if (pt <= 16) { fp = 215 }
+                else if (pt > 16 && pt <= 40) { fp = 205 }
+                else if (pt > 40 && pt <= 60) { fp = 200 }
+                else { fp = 190 }
+            }
+
+            out_ix.textContent = gxj.toFixed(1);
+            out_rx.textContent = hzbj.toFixed(1);
+            out_area.textContent = mj.toFixed(1);
+            out_kgm.textContent = mass.toFixed(1);
+            out_lambda.textContent = lambda.toFixed(1);
+            out_sigma.textContent = sigma.toFixed(1);
+            out_phi.textContent = psi_val;
+            out_st.textContent = wdx.toFixed(1);
+            if (wdx <= fp) {//满足规范
+                document.getElementById("result").style.display = "";
+                document.getElementById("out_docx").style.display = "";
+                document.getElementById("work").style.display = "";
+                document.getElementById("nowork").style.display = "none";
+
+            } else {//不满足规范
+                document.getElementById("result").style.display = "";
+                document.getElementById("nowork").style.display = "";
+                document.getElementById("out_docx").style.display = "none";
+                document.getElementById("work").style.display = "none";
+            }
+
         }
 
-        out_ix.textContent = gxj.toFixed(1);
-        out_rx.textContent = hzbj.toFixed(1);
-        out_area.textContent = mj.toFixed(1);
-        out_kgm.textContent = mass.toFixed(1);
-        out_lambda.textContent = lambda.toFixed(1);
-        out_sigma.textContent = sigma.toFixed(1);
-        out_phi.textContent = psi_val;
-        out_st.textContent = wdx.toFixed(1);
+
     } else {
         //方管计算
         gxj = (a ** 4 - (a - 2 * t) ** 4) / 12;
@@ -151,42 +175,54 @@ function jisuan() {
         mass = mj * 1000 * 7850 * 10 ** -9;
         lambda = l / hzbj;
         sigma = f / mj;
-        psi_val = psi_table[Math.ceil(lambda / xishu)];
-        wdx = sigma / Number(psi_val);
+        //长细比超过250则查表无数据
+        if (Math.ceil(lambda / xishu) > 250) {
+            document.getElementById("result").style.display = "";
+            document.getElementById("nowork").style.display = "";
+            document.getElementById("out_docx").style.display = "none";
+            document.getElementById("work").style.display = "none";
+        }
+        else {
+            psi_val = psi_table[Math.ceil(lambda / xishu)];
+            wdx = sigma / Number(psi_val);
 
-        if (steel.value === "Q345B") {
-            if (t <= 16) { fp = 310 }
-            else if (t > 16 && t <= 35) { fp = 295 }
-            else if (t > 35 && t <= 50) { fp = 265 }
-            else { fp = 250 }
-        } else {
-            if (t <= 16) { fp = 215 }
-            else if (t > 16 && t <= 40) { fp = 205 }
-            else if (t > 40 && t <= 60) { fp = 200 }
-            else { fp = 190 }
+            if (steel.value === "Q345B") {
+                if (t <= 16) { fp = 310 }
+                else if (t > 16 && t <= 35) { fp = 295 }
+                else if (t > 35 && t <= 50) { fp = 265 }
+                else { fp = 250 }
+            } else {
+                if (t <= 16) { fp = 215 }
+                else if (t > 16 && t <= 40) { fp = 205 }
+                else if (t > 40 && t <= 60) { fp = 200 }
+                else { fp = 190 }
+            }
+
+            out_ix.textContent = gxj.toFixed(1);
+            out_rx.textContent = hzbj.toFixed(1);
+            out_area.textContent = mj.toFixed(1);
+            out_kgm.textContent = mass.toFixed(1);
+            out_lambda.textContent = lambda.toFixed(1);
+            out_sigma.textContent = sigma.toFixed(1);
+            out_phi.textContent = psi_val;
+            out_st.textContent = wdx.toFixed(1);
+            if (wdx <= fp) {//满足规范
+                document.getElementById("result").style.display = "";
+                document.getElementById("out_docx").style.display = "";
+                document.getElementById("work").style.display = "";
+                document.getElementById("nowork").style.display = "none";
+        
+            } else {//不满足规范
+                document.getElementById("result").style.display = "";
+                document.getElementById("nowork").style.display = "";
+                document.getElementById("out_docx").style.display = "none";
+                document.getElementById("work").style.display = "none";
+            }
         }
 
-        out_ix.textContent = gxj.toFixed(1);
-        out_rx.textContent = hzbj.toFixed(1);
-        out_area.textContent = mj.toFixed(1);
-        out_kgm.textContent = mass.toFixed(1);
-        out_lambda.textContent = lambda.toFixed(1);
-        out_sigma.textContent = sigma.toFixed(1);
-        out_phi.textContent = psi_val;
-        out_st.textContent = wdx.toFixed(1);
-    }
-    if (wdx <= fp) {//满足规范
-        document.getElementById("result").style.display = "";
-        document.getElementById("out_docx").style.display = "";
-        document.getElementById("work").style.display = "";
-        document.getElementById("nowork").style.display = "none";
 
-    } else {//不满足规范
-        document.getElementById("result").style.display = "";
-        document.getElementById("nowork").style.display = "";
-        document.getElementById("out_docx").style.display = "none";
-        document.getElementById("work").style.display = "none";
     }
+
 
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]); //刷新公式显示
 }
