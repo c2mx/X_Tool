@@ -1,6 +1,10 @@
 # :rocket:X-Tool 工具箱
 工作中常用计算辅助
 
+[网站收藏](https://x.ccoode.com/home.html)
+
+[工具箱](https://x.ccoode.com/)
+
 ## :pushpin:TODO
 * 外挂支撑系统根据不同模式，自动建模、加载、计算、导出结果
 
