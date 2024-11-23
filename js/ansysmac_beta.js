@@ -4,6 +4,7 @@ window.onload = function () {//初始化
   //根据最初的选项，设置各组件的属性
   //四点加载
   document.querySelector('input[id="load4"]').checked = true;
+  document.getElementById("img-node").style.display = "block";
   //6个约束点
   document.querySelector('select[id="sel1"]').selectedIndex = 4;
   var x = document.querySelectorAll('input[name^="node"]');
@@ -123,6 +124,7 @@ function changekp() {
   document.querySelector('input[name="mk"]').disabled=false;
   document.querySelector('input[name="fmk"]').disabled=true;
   document.getElementById("ca360").disabled=false;
+  document.getElementById("img-node").style.display = "none";
 } //changekp加载点数量改为1时，改变加载关键点编号输入框数量，启用360工况，载荷启动弯矩和扭矩、禁用扭矩力
 function changekp4() {
   document.querySelector('input[name="kp2"]').disabled=false;
@@ -133,7 +135,7 @@ function changekp4() {
   document.querySelector('input[name="fmk"]').disabled=false;
   document.getElementById("case8").checked = true;
   document.getElementById("ca360").disabled=true;
-
+  document.getElementById("img-node").style.display = "block";
   chca8();
 } //changekp4加载点数量改为4时，改变加载关键点编号输入框数量，禁用360工况选中工况8，载荷启用扭矩力，禁用弯矩和扭矩
 function changeys(sel) {
