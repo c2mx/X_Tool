@@ -40,7 +40,7 @@ let lambda = 0; //长细比
 let sigma = 0; //轴向应力
 let wdx = 0; //稳定性应力
 let psi_val = 0; //稳定性系数
-let xishu = 0;//钢号修正系数,Q235=1, Q345=0.825
+let xishu = 0;//钢号修正系数,Q235=1, Q345=0.825, Q420=0.748
 let fp = 0;//钢材的抗拉，抗压，抗弯强度设计值
 
 let psi_table = [1, 1, 1, 0.999, 0.999, 0.998, 0.997, 0.996, 0.995, 0.994,
@@ -107,7 +107,11 @@ function jisuan() {
 
     if (steel.value === "Q345B") {
         xishu = 0.825;
-    } else {
+    } 
+    else if (steel.value === "Q420B") {
+        xishu = 0.748;
+    }
+    else {
         xishu = 1;
     }
 
