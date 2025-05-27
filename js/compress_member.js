@@ -137,14 +137,23 @@ function jisuan() {
             wdx = sigma / Number(psi_val);
 
             if (steel.value === "Q345B") {
-                if (pt <= 16) { fp = 310 }
-                else if (pt > 16 && pt <= 35) { fp = 295 }
-                else if (pt > 35 && pt <= 50) { fp = 265 }
+                if (pt <= 16) { fp = 305 }
+                else if (pt > 16 && pt <= 40) { fp = 295 }
+                else if (pt > 40 && pt <= 63) { fp = 290 }
+                else if (pt > 63 && pt <= 80) { fp = 280 }
+                else if (pt > 80 && pt <= 100) { fp = 270 }
                 else { fp = 250 }
-            } else {
+            }
+            else if (steel.value === "Q420B") {
+                if (pt <= 16) { fp = 375 }
+                else if (pt > 16 && pt <= 40) { fp = 355 }
+                else if (pt > 40 && pt <= 63) { fp = 320 }
+                else { fp = 305 }
+            }
+            else {
                 if (pt <= 16) { fp = 215 }
                 else if (pt > 16 && pt <= 40) { fp = 205 }
-                else if (pt > 40 && pt <= 60) { fp = 200 }
+                else if (pt > 40 && pt <= 100) { fp = 200 }
                 else { fp = 190 }
             }
 
@@ -195,14 +204,23 @@ function jisuan() {
             wdx = sigma / Number(psi_val);
 
             if (steel.value === "Q345B") {
-                if (t <= 16) { fp = 310 }
-                else if (t > 16 && t <= 35) { fp = 295 }
-                else if (t > 35 && t <= 50) { fp = 265 }
+                if (pt <= 16) { fp = 305 }
+                else if (pt > 16 && pt <= 40) { fp = 295 }
+                else if (pt > 40 && pt <= 63) { fp = 290 }
+                else if (pt > 63 && pt <= 80) { fp = 280 }
+                else if (pt > 80 && pt <= 100) { fp = 270 }
                 else { fp = 250 }
-            } else {
-                if (t <= 16) { fp = 215 }
-                else if (t > 16 && t <= 40) { fp = 205 }
-                else if (t > 40 && t <= 60) { fp = 200 }
+            }
+            else if (steel.value === "Q420B") {
+                if (pt <= 16) { fp = 375 }
+                else if (pt > 16 && pt <= 40) { fp = 355 }
+                else if (pt > 40 && pt <= 63) { fp = 320 }
+                else { fp = 305 }
+            }
+            else {
+                if (pt <= 16) { fp = 215 }
+                else if (pt > 16 && pt <= 40) { fp = 205 }
+                else if (pt > 40 && pt <= 100) { fp = 200 }
                 else { fp = 190 }
             }
 
