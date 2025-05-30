@@ -14,3 +14,4 @@
 * 2024-1-26 使用github pages部署发布网站
 * 2024-4-20 更改域名
 * 2024-7-30 由于github pages 访问太慢，转移到自己的VPS部署
+* 2025-5-10 转移到cloudflare的worker pages部署
