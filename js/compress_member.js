@@ -19,11 +19,13 @@ const out_sigma = document.getElementById("sigma"); //
 const out_phi = document.getElementById("phi"); //
 const out_st = document.getElementById("st"); //
 
-const jiemian = document.getElementById("jiemian"); //截面类型选择
+const jiemian = document.getElementById("jiemian"); //截面形状选择
 const steel = document.getElementById("steel"); //钢材类型选择
 const pipeclass = document.getElementById("pipeclass"); //圆管参数输入区域
 const rectclass = document.getElementById("rectclass"); //方管参数输入区域
+const area_type = document.getElementById('area-type'); //截面类别选择下拉框
 
+const E = 206000;         // 弹性模量
 //计算参数
 let d = 0; //圆管直径
 let pt = 0; //圆管壁厚
@@ -39,37 +41,11 @@ let mass = 0; //单位重量
 let lambda = 0; //长细比
 let sigma = 0; //轴向应力
 let wdx = 0; //稳定性应力
+
+let fy = 235; //钢材屈服强度，默认Q235
 let psi_val = 0; //稳定性系数
 let xishu = 0;//钢号修正系数,Q235=1, Q345=0.825, Q420=0.748
 let fp = 0;//钢材的抗拉，抗压，抗弯强度设计值
-
-let psi_table = [1, 1, 1, 0.999, 0.999, 0.998, 0.997, 0.996, 0.995, 0.994,
-    0.992, 0.991, 0.989, 0.987, 0.985, 0.983, 0.981, 0.978, 0.976, 0.973,
-    0.970, 0.967, 0.963, 0.960, 0.957, 0.953, 0.950, 0.946, 0.943, 0.939,
-    0.936, 0.932, 0.929, 0.925, 0.921, 0.918, 0.914, 0.910, 0.906, 0.903,
-    0.899, 0.895, 0.891, 0.886, 0.882, 0.878, 0.874, 0.870, 0.865, 0.861,
-    0.856, 0.852, 0.847, 0.842, 0.837, 0.833, 0.828, 0.823, 0.818, 0.812,
-    0.807, 0.802, 0.796, 0.791, 0.785, 0.780, 0.774, 0.768, 0.762, 0.757,
-    0.751, 0.745, 0.738, 0.732, 0.726, 0.720, 0.713, 0.707, 0.701, 0.694,
-    0.687, 0.681, 0.674, 0.668, 0.661, 0.654, 0.648, 0.641, 0.634, 0.628,
-    0.621, 0.614, 0.607, 0.601, 0.594, 0.587, 0.581, 0.574, 0.568, 0.561,
-    0.555, 0.548, 0.542, 0.535, 0.529, 0.523, 0.517, 0.511, 0.504, 0.498,
-    0.492, 0.487, 0.481, 0.475, 0.469, 0.464, 0.458, 0.453, 0.447, 0.442,
-    0.436, 0.431, 0.426, 0.421, 0.416, 0.411, 0.406, 0.401, 0.396, 0.392,
-    0.387, 0.383, 0.378, 0.374, 0.369, 0.365, 0.361, 0.357, 0.352, 0.348,
-    0.344, 0.340, 0.337, 0.333, 0.329, 0.325, 0.322, 0.318, 0.314, 0.311,
-    0.308, 0.304, 0.301, 0.297, 0.294, 0.291, 0.288, 0.285, 0.282, 0.279,
-    0.276, 0.273, 0.270, 0.267, 0.264, 0.262, 0.259, 0.256, 0.253, 0.251,
-    0.248, 0.246, 0.243, 0.241, 0.238, 0.236, 0.234, 0.231, 0.229, 0.227,
-    0.225, 0.222, 0.220, 0.218, 0.216, 0.214, 0.212, 0.210, 0.208, 0.206,
-    0.204, 0.202, 0.200, 0.198, 0.196, 0.195, 0.193, 0.191, 0.189, 0.188,
-    0.186, 0.184, 0.183, 0.181, 0.179, 0.178, 0.176, 0.175, 0.173, 0.172,
-    0.170, 0.169, 0.167, 0.166, 0.164, 0.163, 0.162, 0.160, 0.159, 0.158,
-    0.156, 0.155, 0.154, 0.152, 0.151, 0.150, 0.149, 0.147, 0.146, 0.145,
-    0.144, 0.143, 0.142, 0.141, 0.139, 0.138, 0.137, 0.136, 0.135, 0.134,
-    0.133, 0.132, 0.131, 0.130, 0.129, 0.128, 0.127, 0.126, 0.125, 0.124,
-    0.123
-]
 
 function changejiemian() {
     //截面改变
@@ -78,11 +54,13 @@ function changejiemian() {
         rectclass.style.display = "none";
         rst.style.display = "none";
         out_docx.style.display = "none";
+        area_type.value = "type-a"; //重置截面类别选择
     } else {
         pipeclass.style.display = "none";
         rectclass.style.display = "";
         rst.style.display = "none";
         out_docx.style.display = "none";
+        area_type.value = "type-b"; //重置截面类别选择
     }
 }
 function cleardata() {
@@ -96,6 +74,66 @@ function cleardata() {
     rst.style.display = "none";
 }
 
+
+function Coef(lambda, sectionType, fy, E = 206000) {
+    // 正则化长细比λn = (λ/π) * sqrt(fy/E)
+    const lambda_n = (lambda / Math.PI) * Math.sqrt(fy / E);
+    
+    // 根据截面类别和λn确定系数
+    let alpha1, alpha2, alpha3;
+    switch(sectionType) {
+        case 'type-a':
+            alpha1 = 0.41;
+            alpha2 = 0.986;
+            alpha3 = 0.152;
+            break;
+        case 'type-b':
+            alpha1 = 0.65;
+            alpha2 = 0.965;
+            alpha3 = 0.300;
+            break;
+        case 'type-c':
+            if (lambda_n <= 1.05) {
+                alpha1 = 0.73;
+                alpha2 = 0.906;
+                alpha3 = 0.595;
+                break;
+            } else {
+                alpha1 = 0.73;
+                alpha2 = 1.216;
+                alpha3 = 0.302;
+                break;
+            }
+        case 'type-d':
+            if (lambda_n <= 1.05) {
+                alpha1 = 1.35;
+                alpha2 = 0.868;
+                alpha3 = 0.915;
+                break;
+            } else {
+                alpha1 = 1.35;
+                alpha2 = 1.375;
+                alpha3 = 0.432;
+                break;
+            }
+        default:
+            throw new Error('无效截面类型');
+    }
+    let phi;
+
+    // 根据λn选择计算公式
+    if (lambda_n <= 0.215) {
+        phi = 1 - alpha1 * Math.pow(lambda_n, 2);
+    } else {
+        const term1 = alpha2 + alpha3 * lambda_n + Math.pow(lambda_n, 2);
+        const term2 = Math.sqrt(Math.pow(term1, 2) - 4 * Math.pow(lambda_n, 2));
+        phi = (term1 - term2) / (2 * Math.pow(lambda_n, 2));
+    }
+    // 将结果保留三位小数
+    return parseFloat(phi.toFixed(3));
+}
+
+
 function jisuan() {
     //计算参数赋值
     d = Number(pipd.value); //圆管直径
@@ -106,13 +144,13 @@ function jisuan() {
     f = Number(fz.value); //轴向压力
 
     if (steel.value === "Q345B") {
-        xishu = 0.825;
+        fy = 345;
     } 
     else if (steel.value === "Q420B") {
-        xishu = 0.748;
+        fy = 420;
     }
     else {
-        xishu = 1;
+        fy = 235;
     }
 
 
@@ -124,16 +162,8 @@ function jisuan() {
         mass = mj * 1000 * 7850 * 10 ** -9;
         lambda = l / hzbj;
         sigma = f / mj;
-        //长细比超过250则查表无数据
-        if (Math.ceil(lambda / xishu) > 250) {
-            document.getElementById("result").style.display = "none";
-            document.getElementById("nowork").style.display = "";
-            document.getElementById("toolong").style.display = "";
-            document.getElementById("out_docx").style.display = "none";
-            document.getElementById("work").style.display = "none";
-        }
-        else {
-            psi_val = psi_table[Math.ceil(lambda / xishu)];
+       
+            psi_val = Coef(lambda, area_type.value, fy, E);
             wdx = sigma / Number(psi_val);
 
             if (steel.value === "Q345B") {
@@ -180,7 +210,7 @@ function jisuan() {
                 document.getElementById("toolong").style.display = "none";
             }
 
-        }
+      
 
 
     } else {
@@ -191,16 +221,8 @@ function jisuan() {
         mass = mj * 1000 * 7850 * 10 ** -9;
         lambda = l / hzbj;
         sigma = f / mj;
-        //长细比超过250则查表无数据
-        if (Math.ceil(lambda / xishu) > 250) {
-            document.getElementById("result").style.display = "none";
-            document.getElementById("nowork").style.display = "";
-            document.getElementById("out_docx").style.display = "none";
-            document.getElementById("work").style.display = "none";
-            document.getElementById("toolong").style.display = "";
-        }
-        else {
-            psi_val = psi_table[Math.ceil(lambda / xishu)];
+        
+            psi_val = Coef(lambda, area_type.value, fy, E);
             wdx = sigma / Number(psi_val);
 
             if (steel.value === "Q345B") {
@@ -246,7 +268,7 @@ function jisuan() {
                 document.getElementById("work").style.display = "none";
                 document.getElementById("toolong").style.display = "none";
             }
-        }
+       
 
 
     }

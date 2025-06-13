@@ -7,7 +7,7 @@
     <meta name="keywords" content="压杆校核, 强度, 稳定性" />
     <meta name="description" content="轴向受压杆件强度稳定性在线计算复核" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/images/icon.svg">
+    <link rel="icon" type="image/svg+xml" href="../images/icon.svg">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-icons/1.10.3/font/bootstrap-icons.css" />
     <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
@@ -42,22 +42,22 @@
                 <a class="nav-link" href="/">首页</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tools/ansysmac.html">宏生成</a>
+                <a class="nav-link" href="../tools/ansysmac.html">宏生成</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tools/lunya.html">轮压计算</a>
+                <a class="nav-link" href="../tools/lunya.html">轮压计算</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tools/pianbai.html">等效侧向力</a>
+                <a class="nav-link" href="../tools/pianbai.html">等效侧向力</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tools/compress_member.html">压杆校核</a>
+                <a class="nav-link" href="../tools/compress_member.html">压杆校核</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tools/win10.html">Win10/11激活</a>
+                <a class="nav-link" href="../tools/win10.html">Win10/11激活</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/tools/matrix.html">附着反力</a>
+                <a class="nav-link" href="../tools/matrix.html">附着反力</a>
             </li>
         </ul>
         <h1 class="text-center bi-gear-wide-connected p-3 text-nowrap">
@@ -69,7 +69,16 @@
                 <option value="pipe" selected>圆管</option>
                 <option value="rect">方管</option>
             </select>
-            <label for="jiemian" class="form-label">截面类型</label>
+            <label for="jiemian" class="form-label">截面形状</label>
+        </div>
+        <div class="form-floating mb-3">
+            <select class="form-select" id="area-type" name="area-type">
+                <option value="type-a" selected>a类</option>
+                <option value="type-b">b类</option>
+                <option value="type-c">c类</option>
+                <option value="type-d">d类</option>
+            </select>
+            <label for="area-type" class="form-label">截面类别</label>
         </div>
         <div class="form-floating mb-3">
             <select class="form-select" id="steel" name="steel">
@@ -182,7 +191,7 @@
             </div>
         </footer>
     </div>
-    <script src="/js/compress_member.js"></script>
+    <script src="../js/compress_member.js"></script>
   
 </body>
 
