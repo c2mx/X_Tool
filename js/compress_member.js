@@ -143,6 +143,16 @@ function jisuan() {
     l = Number(len.value); //计算长度
     f = Number(fz.value); //轴向压力
 
+
+    const paramDisplayNames = {
+        d: '圆管直径',
+        pt: '圆管壁厚', 
+        a: '方管边长',
+        t: '方管壁厚',
+        l: '计算长度',
+        f: '轴向压力',
+    };
+
     if (steel.value === "Q345B") {
         fy = 345;
     } 
@@ -156,6 +166,20 @@ function jisuan() {
 
     if (jiemian.value === "pipe") {
         //圆管计算
+        // Parameters that must be greater than 0
+        const greaterThanZeroParams = { d, pt, l, f };
+        for (const [name, value] of Object.entries(greaterThanZeroParams)) {
+            const displayName = paramDisplayNames[name] || name; 
+            if (value <= 0) {
+                alert(`参数 "${displayName}" 必须大于 0。当前值为: ${value}`);
+                return false;
+            }
+        }
+        // 圆管壁厚不能大于直径的一半，否则提示错误警告
+        if (pt >= d / 2) {
+            alert("圆管壁厚不能大于直径的一半。");
+            return false;
+        }
         gxj = (Math.PI * (d ** 4 - (d - 2 * pt) ** 4)) / 64;
         mj = (Math.PI * (d ** 2 - (d - 2 * pt) ** 2)) / 4;
         hzbj = (gxj / mj) ** 0.5;
@@ -215,6 +239,20 @@ function jisuan() {
 
     } else {
         //方管计算
+        // Parameters that must be greater than 0
+        const greaterThanZeroParams = { a, t, l, f };
+        for (const [name, value] of Object.entries(greaterThanZeroParams)) {
+            const displayName = paramDisplayNames[name] || name; 
+            if (value <= 0) {
+                alert(`参数 "${displayName}" 必须大于 0。当前值为: ${value}`);
+                return false;
+            }
+        }
+        // 方管壁厚不能大于边长的一半，否则提示错误警告
+        if (t >= a / 2) {
+            alert("方管壁厚不能大于边长的一半。");
+            return false;
+        }
         gxj = (a ** 4 - (a - 2 * t) ** 4) / 12;
         mj = a ** 2 - (a - 2 * t) ** 2;
         hzbj = (gxj / mj) ** 0.5;
