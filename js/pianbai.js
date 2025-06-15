@@ -25,7 +25,43 @@ function jisuan() {
     const n = Number(document.querySelector('input[name="n"]').value);
     const t = Number(document.querySelector('input[name="t"]').value);
 
-    if (l * b * e * gb * g * r * gg * tg * p * n * t > 0) {
+    // Define custom display names for your parameters
+    const paramDisplayNames = {
+        l: '吊臂长度',
+        b: '吊臂宽度', // Example: You'll need to fill these in for your specific parameters
+        e: '吊臂充实率',
+        gb: '吊臂自重',
+        g: '吊物重量',
+        r: '幅度',
+        gg: '钩头含绳重量',
+        tg: '吊物偏摆角度',
+        p: '工作状态计算风压',
+        n: '回转速度',
+        t: '回转制动时间'
+        // Add all your parameters here with their desired display names
+    };
+
+    // Parameters that must be greater than 0
+    const greaterThanZeroParams = { l, b, e, gb, r, tg, n, t };
+    for (const [name, value] of Object.entries(greaterThanZeroParams)) {
+        const displayName = paramDisplayNames[name] || name; // Use custom name or fallback to original
+        if (value <= 0) {
+            alert(`参数 "${displayName}" 必须大于 0。当前值为: ${value}`);
+            return false;
+        }
+    }
+
+    // Parameters that cannot be negative (must be >= 0)
+    const nonNegativeParams = { g, gg, p };
+    for (const [name, value] of Object.entries(nonNegativeParams)) {
+        const displayName = paramDisplayNames[name] || name; // Use custom name or fallback to original
+        if (value < 0) {
+            alert(`参数 "${displayName}" 不能为负数。当前值为: ${value}`);
+            return false;
+        }
+    }
+
+    
        
         huo = tg * (g + gg);
         wind = e * l * b * (1+0.59) * 1.2 * p / 9800;
@@ -39,7 +75,7 @@ function jisuan() {
         out_f.textContent = f.toFixed(2);
         
         document.getElementById("result").style.display = "";
-    }
+    
 }
 function cleardata() {
     //clear
