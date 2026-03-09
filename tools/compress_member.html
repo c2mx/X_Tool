@@ -139,6 +139,12 @@
                 </div>
             </div>
         </div>
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="consider-self-weight">
+            <label class="form-check-label" for="consider-self-weight">
+                考虑自重弯矩
+            </label>
+        </div>
 
         <div class="row">
             <div class="d-grid col mx-auto mb-3">
@@ -159,8 +165,13 @@
                 <li>回转半径：<mark id="rx"></mark>$mm$</li>
                 <li>截面面积：<mark id="area"></mark>$mm^2$</li>
                 <li>单位重量：<mark id="kgm"></mark>$kg/m$</li>
+                <li>杆件重量：<mark id="total-weight"></mark>$kg$</li>
+                <li>抗弯截面模量：<mark id="w"></mark>$mm^3$</li>
                 <li>长细比：<mark id="lambda"></mark></li>
                 <li>轴向应力：<mark id="sigma"></mark>$MPa$</li>
+                <li>自重弯矩：<mark id="self-weight-moment"></mark>$N·mm$</li>
+                <li>自重应力：<mark id="self-weight-stress"></mark>$MPa$</li>
+                <li>合应力：<mark id="total-stress"></mark>$MPa$</li>
                 <li>稳定系数$\varphi$：<mark id="phi"></mark></li>
                 <li>稳定性：<mark id="st"></mark>$MPa$</li>
             </ul>
