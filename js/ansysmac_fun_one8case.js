@@ -197,7 +197,7 @@ ALLSEL,ALL
 `
         for (var j = 1; j <= ysnum; j++) {
             mac += `
-FANLI0${i}(${j},1)=node0${j}
+FANLI0${i}(${j},1)=node${j}
 
 `
         }
@@ -222,16 +222,16 @@ FANLI0${i}(${n},1)=${temp}
         //反力提取
         for (var k = 1; k <= ysnum; k++) {
             mac += `
-*GET,FANLI0${i}(${k},2),NODE,node0${k},RF,FX
-*GET,FANLI0${i}(${k},3),NODE,node0${k},RF,FY
-*GET,FANLI0${i}(${k},4),NODE,node0${k},RF,FZ
+*GET,FANLI0${i}(${k},2),NODE,node${k},RF,FX
+*GET,FANLI0${i}(${k},3),NODE,node${k},RF,FY
+*GET,FANLI0${i}(${k},4),NODE,node${k},RF,FZ
 
 `
             if (rm == 1) {
                 mac += `
-*GET,FANLI0${i}(${k},5),NODE,node0${k},RF,MX
-*GET,FANLI0${i}(${k},6),NODE,node0${k},RF,MY
-*GET,FANLI0${i}(${k},7),NODE,node0${k},RF,MZ
+*GET,FANLI0${i}(${k},5),NODE,node${k},RF,MX
+*GET,FANLI0${i}(${k},6),NODE,node${k},RF,MY
+*GET,FANLI0${i}(${k},7),NODE,node${k},RF,MZ
 
 `
             }
@@ -240,7 +240,7 @@ FANLI0${i}(${n},1)=${temp}
         for (var l = ysnum + 1; l <= ysnum + af * afnum; l++) {
             let temp = l - ysnum;
             mac += `
-*GET,FANLI0${i}(${l},2),ELEM,elem0${temp},SMISC,1
+*GET,FANLI0${i}(${l},2),ELEM,elem${temp},SMISC,1
 
 `
         }

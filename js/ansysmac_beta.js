@@ -11,7 +11,7 @@ window.onload = function () {//初始化
   for (i = 0; i < 6; i++) {
     x[i].disabled=false;
   }
-  for (i = 6; i < 8; i++) {
+  for (i = 6; i < 12; i++) {
     x[i].disabled=true;
   }
   //8工况
@@ -144,7 +144,7 @@ function changeys(sel) {
     for (i = 0; i < ysnum; i++) {
       x[i].disabled=false;
     }
-    for (i = ysnum; i < 8; i++) {
+    for (i = ysnum; i < 12; i++) {
       x[i].disabled=true;
     }
 } //changeys约束点数量改变时，改变约束点编号输入框数量

@@ -26,7 +26,7 @@ X7=10000000
     }
     for (var k = 1; k <= ysnum; k++) {
         mac += `
-NONUM(${k})=node0${k}
+NONUM(${k})=node${k}
 
 `
     }

@@ -18,6 +18,10 @@ const node5_dom = document.querySelector('input[name="node5"]');//约束点5编�
 const node6_dom = document.querySelector('input[name="node6"]');//约束点6编号
 const node7_dom = document.querySelector('input[name="node7"]');//约束点7编号
 const node8_dom = document.querySelector('input[name="node8"]');//约束点8编号
+const node9_dom = document.querySelector('input[name="node9"]');//约束点9编号
+const node10_dom = document.querySelector('input[name="node10"]');//约束点10编号
+const node11_dom = document.querySelector('input[name="node11"]');//约束点11编号
+const node12_dom = document.querySelector('input[name="node12"]');//约束点12编号
 
 let kp1 = 0;
 let kp2 = 0;
@@ -32,6 +36,10 @@ let node5 = 0;
 let node6 = 0;
 let node7 = 0;
 let node8 = 0;
+let node9 = 0;
+let node10 = 0;
+let node11 = 0;
+let node12 = 0;
 
 let fix = 0;//是否约束旋转
 
@@ -123,6 +131,10 @@ function read_input() {
     node6 = Number(node6_dom.value);
     node7 = Number(node7_dom.value);
     node8 = Number(node8_dom.value);
+    node9 = Number(node9_dom.value);
+    node10 = Number(node10_dom.value);
+    node11 = Number(node11_dom.value);
+    node12 = Number(node12_dom.value);
 
     if (document.querySelector('input[id="fix"]').checked == false) {
         fix = 0;
@@ -277,38 +289,58 @@ f_mk=${fmk * 10000}
 
     //约束点
     mac += `
-node01=${node1}
-node02=${node2}
+node1=${node1}
+node2=${node2}
 `
 
     if (ysnum >= 3) {
         mac += `
-node03=${node3}
+node3=${node3}
 `
     }
     if (ysnum >= 4) {
         mac += `
-node04=${node4}
+node4=${node4}
 `
     }
     if (ysnum >= 5) {
         mac += `
-node05=${node5}
+node5=${node5}
 `
     }
     if (ysnum >= 6) {
         mac += `
-node06=${node6}
+node6=${node6}
 `
     }
     if (ysnum >= 7) {
         mac += `
-node07=${node7}
+node7=${node7}
 `
     }
     if (ysnum >= 8) {
         mac += `
-node08=${node8}
+node8=${node8}
+`
+    }
+    if (ysnum >= 9) {
+        mac += `
+node9=${node9}
+`
+    }
+    if (ysnum >= 10) {
+        mac += `
+node10=${node10}
+`
+    }
+    if (ysnum >= 11) {
+        mac += `
+node11=${node11}
+`
+    }
+    if (ysnum >= 12) {
+        mac += `
+node12=${node12}
 `
     }
 
